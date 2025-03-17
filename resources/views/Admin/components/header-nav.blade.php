@@ -1,3 +1,8 @@
+<style>
+    .admin-user-logout {
+        margin-right: 10px;
+    }
+</style>
 <div class="header-dashboard">
     <div class="wrap">
         <div class="header-left">
@@ -262,13 +267,25 @@
                             </a>
                         </li>
                         <li>
-                            <a href="login.html" class="user-item">
-                                <div class="icon">
-                                    <i class="icon-log-out"></i>
-                                </div>
-                                <div class="body-title-2">Log out</div>
-                            </a>
+
+
+
+{{--                            <a href="login.html" class="user-item">--}}
+{{--                                <div class="icon">--}}
+{{--                                    <i class="icon-log-out"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="body-title-2">Log out</div>--}}
+{{--                            </a>--}}
+
+                            <form class="user-item" method="POST" action="{{ route('logout') }}" id="logout-form">
+                                @csrf
+                                <a href="{{ route('logout') }}" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    <div class="icon admin-user-logout logoutIcon"><i class="icon-log-out logoutIcon"></i><span class="text body-title-2 me-4">logout</span></div>
+                                </a>
+                            </form>
+
                         </li>
+                        
                     </ul>
                 </div>
             </div>

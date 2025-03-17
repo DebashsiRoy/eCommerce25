@@ -13,6 +13,14 @@
             <div class="center-heading">Main Home</div>
             <ul class="menu-list">
                 <li class="menu-item">
+                    <a href="{{ route('home.index') }}" class="">
+                        <div class="icon"><i class="icon-shopping-bag"></i></div>
+                        <div class="text">View Shop</div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu-list">
+                <li class="menu-item">
                     <a href="{{ route('admin.index') }}" class="">
                         <div class="icon"><i class="icon-grid"></i></div>
                         <div class="text">Dashboard</div>
