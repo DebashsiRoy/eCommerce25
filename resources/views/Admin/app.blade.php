@@ -19,6 +19,8 @@
     <link rel="apple-touch-icon-precomposed" href="{{ asset('admin/images/favicon.ico') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/sweetalert.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/dataTables.dataTables.min.css') }}">
+    <script src="{{ asset('admin/js/axios.min.js') }}"></script>
     @stack('styles')
 
 </head>
@@ -55,6 +57,7 @@
 <script src="{{ asset('admin/js/apexcharts/apexcharts.js') }}"></script>
 <script src="{{ asset('admin/js/main.js') }}"></script>
 <script src="{{ asset('admin/js/custom.js') }}"></script>
+<script src="{{ asset('admin/js/dataTables.min.js') }}"></script>
 @stack('scripts')
 </body>
 

@@ -18,7 +18,8 @@ class CategoryController extends Controller
 
     public function CategoryList(Request $request)
     {
-        return Category::all();
+        $user_id = Auth::id();
+        return Category::where('user_id', $user_id)->get();
     }
     public function CategoryCreate(Request $request)
     {
@@ -71,26 +72,40 @@ class CategoryController extends Controller
     }
 
 
-
     public function CategoryUpdate(Request $request)
     {
-        $category_id=$request->input('category_id');
-        $user_id=Auth::user()->id;
+        $category_id = $request->input('id');
+        $user_id = Auth::user()->id;
 
-        $categoryImg=$request->file('categoryImg');
+        if ($request->hasFile('categoryImg')) {
+            // Upload New File
+            $img = $request->file('categoryImg');
 
-        $t=time();
-        $file_name=$categoryImg->getClientOriginalName();
-        $img_name="{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
-        $img_url="upload/category/{$img_name}";
+            $t = time();
+            $file_name = $img->getClientOriginalName();
+            $img_name = "{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
+            $img_url = "uploads/category/{$img_name}";
+            $img->move(public_path('uploads/category/'), $img_name);
 
+            // Delete Old File
+            $filePath = public_path($request->input('file_path')); // Convert to absolute path
 
-        // Upload File
-        $categoryImg->move($img_url, $img_name);
+            if (File::exists($filePath)) { // Check if file exists before deleting
+                File::delete($filePath);
+            }
 
-        return Category::where('id',$category_id)->update([
-            'categoryName'=> $request->input('categoryName'),
-            'categoryImg'=> $request->input('categoryImg'),
-        ]);
+            // Update Category
+            return Category::where('id', $category_id)->where('user_id', $user_id)->update([
+                'categoryName' => $request->input('categoryName'),
+                'categoryImg' => $img_url,
+            ]);
+        } else {
+            // Only update category name if no file is uploaded
+            return Category::where('id', $category_id)->where('user_id', $user_id)->update([
+                'categoryName' => $request->input('categoryName')
+            ]);
+        }
     }
+
+
 }

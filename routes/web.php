@@ -29,7 +29,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/category-page', [CategoryController::class, 'CategoryPage'])->name('category.index');
     Route::get('/category-list', [CategoryController::class, 'CategoryList'])->name('category.list');
     Route::post('/category-crate', [CategoryController::class, 'CategoryCreate'])->name('category.create');
-    Route::post('/category-update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
+    Route::post('/category-update', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
     Route::post('/category-delete', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
 });
 

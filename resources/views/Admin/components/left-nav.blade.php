@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="sub-menu-item">
-                            <a href="categories.html" class="">
+                            <a href="{{ route('category.index') }}" class="">
                                 <div class="text">Categories</div>
                             </a>
                         </li>
