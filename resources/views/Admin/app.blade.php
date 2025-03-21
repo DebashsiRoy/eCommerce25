@@ -8,24 +8,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/animate.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/animation.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap-select.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/font/fonts.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/icon/style.css') }}">
-    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.ico') }}">
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('admin/images/favicon.ico') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/sweetalert.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/custom.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/dataTables.dataTables.min.css') }}">
-    <script src="{{ asset('admin/js/axios.min.js') }}"></script>
+    @include('Admin.components.css')
+    @include('Admin.components.js')
+
+    @stack('scripts')
+
     @stack('styles')
 
 </head>
 
 <body class="body">
+
 <div id="wrapper">
     <div id="page" class="">
         <div class="layout-wrap">
@@ -41,6 +34,7 @@
                 @include('Admin.components.left-nav')
                 @include('Admin.components.header-nav')
                 <div class="main-content">
+                    <div id="loader" class="loader-line d-none"></div>
                     @yield('content')
                     @include('Admin.components.copy-section')
                 </div>
@@ -50,15 +44,7 @@
     </div>
 </div>
 
-<script src="{{ asset('admin/js/jquery.min.js') }}"></script>
-<script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('admin/js/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('admin/js/sweetalert.min.js') }}"></script>
-<script src="{{ asset('admin/js/apexcharts/apexcharts.js') }}"></script>
-<script src="{{ asset('admin/js/main.js') }}"></script>
-<script src="{{ asset('admin/js/custom.js') }}"></script>
-<script src="{{ asset('admin/js/dataTables.min.js') }}"></script>
-@stack('scripts')
+
 </body>
 
 </html>

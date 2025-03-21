@@ -7,12 +7,12 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Mockery\Exception;
 
 class CategoryController extends Controller
 {
     public function CategoryPage()
     {
-
         return view('Admin.pages.category-page');
     }
 
@@ -25,25 +25,23 @@ class CategoryController extends Controller
     {
         $userId = Auth::id();
         // Prepars File Name & path
-        $img=$request->file('categoryImg');  // database insert field
+        $img = $request->file('categoryImg');  // database insert field
 
-        $t=time();
-        $file_name=$img->getClientOriginalName();
-        $img_name="{$userId}-{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
-        $img_url="uploads/category/{$img_name}";  //
+        $t = time();
+        $file_name = $img->getClientOriginalName();
+        $img_name = "{$userId}-{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
+        $img_url = "uploads/category/{$img_name}";  //
 
         // Upload File
-        $img->move(public_path('uploads/category/'),$img_name);
+        $img->move(public_path('uploads/category/'), $img_name);
 
 
         return Category::create([
-            'categoryName'=> $request->input('categoryName'),
-            'categoryImg'=> $img_url,
-            'user_id'=>$userId,
-
+            'categoryName' => $request->input('categoryName'),
+            'categoryImg' => $img_url,
+            'user_id' => $userId,
         ]);
     }
-
 
     public function CategoryDelete(Request $request)
     {
