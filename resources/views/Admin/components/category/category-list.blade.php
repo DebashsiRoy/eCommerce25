@@ -16,7 +16,7 @@
                 <table class="table-secondary flex-auto" id="tableData">
                     <thead class="myTable-bg">
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">Serial Number</th>
                         <th scope="col">Name</th>
                         <th scope="col">Category Image</th>
                         <th scope="col">Action</th>
@@ -48,21 +48,44 @@
             let row=`<tr>
                 <td>${index+1}</td>
                 <td>${item['categoryName']}</td>
-                <td><img src="${item['categoryImg']}" alt="${item['categoryName']}" width="70" height="75"></td>
+                <td><img src="${item['categoryImg']}" alt="${item['categoryName']}" width="40" height="35"></td>
                 <td>
-                    <button class="btn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger fs-3 rounded-5">Delete</button>
+                    <button data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</button>
+
+<!--                    // ****************Read me *******************-->
+<!--                    ///why I don't create editBtn id for pic-up a category->id. Because has many class but id is unique.-->
+<!--                    // for this use HTML "data-id" attribute to get id in button-->
+
+                    <button data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteCategory">Delete</button>
+
+<!--                    // ****************Read me *******************-->
+<!--                    ///why I don't create deleteBtn id for pic-up a category->id. Because has many class but id is unique.-->
+<!--                    // for this use HTML "data-id" attribute to get id in button-->
+
                 </td>
             </tr>`
             tableList.append(row)
         })
 
+        $('.editBtn').on('click', function (){
+            let id = $(this).data('id');
+            alert(id);
+        })
+
+        $('.deleteBtn').on('click', function (){
+            let id= $(this).data('id');                 // delete button's id
+            $("#deleteCategory").modal('show');         // Show delete modal
+            $("#deleteID").val(id);                     // get id into the delete modal input field
+        })
+
         $(document).ready( function () {
             $('#tableData').DataTable({
                 order: [[0, 'desc']],
-                lengthMenu: [5, 10, 20, { label: 'All', value: -1 }]
+                lengthMenu: [10, 20, 30, { label: 'All', value: -1 }]
             });
         } );
+
+
 
     }
 

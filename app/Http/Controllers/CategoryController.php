@@ -61,12 +61,8 @@ class CategoryController extends Controller
             }
 
             // Now, delete the category from the database
-            $category->delete();
-
-            return response()->json(['success' => 'Category and image deleted successfully.']);
+            return $category->delete();
         }
-
-        return response()->json(['error' => 'Category not found.'], 404);
     }
 
 

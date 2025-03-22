@@ -92,9 +92,8 @@
         border-width: 3px;
     }
     .modal-content {
-        width: 140%;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        width: 100%;
+        padding: 15px;
         border-radius: 10px;
         border-block-color: lightskyblue;
     }
