@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/logout',
             'http://127.0.0.1:8000/category-delete',
             'http://127.0.0.1:8000/category-update',
+            'http://127.0.0.1:8000/category-by-id',
 
         ]);
     })

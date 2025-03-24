@@ -65,6 +65,14 @@ class CategoryController extends Controller
         }
     }
 
+    // This section is for fill form by old data
+    function categoryByID(Request $request)
+    {
+        $user_id = Auth::id();
+        $category_id=$request->input('id');
+        return category::where('id',$category_id)->where('user_id',$user_id)->first();
+    }
+
 
     public function CategoryUpdate(Request $request)
     {
@@ -77,16 +85,18 @@ class CategoryController extends Controller
 
             $t = time();
             $file_name = $img->getClientOriginalName();
-            $img_name = "{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
+            $img_name = "{$user_id}-{$category_id}-{}-{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
             $img_url = "uploads/category/{$img_name}";
             $img->move(public_path('uploads/category/'), $img_name);
 
-            // Delete Old File
-            $filePath = public_path($request->input('file_path')); // Convert to absolute path
-
-            if (File::exists($filePath)) { // Check if file exists before deleting
-                File::delete($filePath);
-            }
+             //Delete Old File
+//            $filePath = public_path($request->input('file_path')); // Convert to absolute path
+//
+//            if (File::exists($filePath)) { // Check if file exists before deleting
+//                File::delete($filePath);
+//            }
+            $filePath = $request->input('file_path');
+            File::delete($filePath);
 
             // Update Category
             return Category::where('id', $category_id)->where('user_id', $user_id)->update([

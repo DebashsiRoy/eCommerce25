@@ -31,6 +31,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::post('/category-crate', [CategoryController::class, 'CategoryCreate'])->name('category.create');
     Route::post('/category-update', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
     Route::post('/category-delete', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
+    Route::post('/category-by-id', [CategoryController::class, 'categoryByID'])->name('category.id');
 });
 
 

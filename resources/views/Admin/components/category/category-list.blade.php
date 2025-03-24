@@ -50,13 +50,13 @@
                 <td>${item['categoryName']}</td>
                 <td><img src="${item['categoryImg']}" alt="${item['categoryName']}" width="40" height="35"></td>
                 <td>
-                    <button data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</button>
+                    <button data-path="${item['categoryImg']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</button>
 
 <!--                    // ****************Read me *******************-->
 <!--                    ///why I don't create editBtn id for pic-up a category->id. Because has many class but id is unique.-->
 <!--                    // for this use HTML "data-id" attribute to get id in button-->
 
-                    <button data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteCategory">Delete</button>
+                    <button data-path="${item['categoryImg']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteCategory">Delete</button>
 
 <!--                    // ****************Read me *******************-->
 <!--                    ///why I don't create deleteBtn id for pic-up a category->id. Because has many class but id is unique.-->
@@ -65,27 +65,28 @@
                 </td>
             </tr>`
             tableList.append(row)
+        });
+
+        $('.editBtn').on('click', async function () {
+            let id= $(this).data('id');
+            let filePath= $(this).data('path');
+            // This path get from html <button data-path="${item['categoryImg']}"
+            await FillUpUpdateForm(id,filePath)
+            $("updateCategory").modal('show');
         })
 
-        $('.editBtn').on('click', function (){
-            let id = $(this).data('id');
-            alert(id);
-        })
+            $('.deleteBtn').on('click', function (){
+                let id= $(this).data('id');                 // delete button's id
+                $("#deleteCategory").modal('show');         // Show delete modal
+                $("#deleteID").val(id);                     // get id into the delete modal input field
+            })
 
-        $('.deleteBtn').on('click', function (){
-            let id= $(this).data('id');                 // delete button's id
-            $("#deleteCategory").modal('show');         // Show delete modal
-            $("#deleteID").val(id);                     // get id into the delete modal input field
-        })
-
-        $(document).ready( function () {
-            $('#tableData').DataTable({
-                order: [[0, 'desc']],
-                lengthMenu: [10, 20, 30, { label: 'All', value: -1 }]
-            });
-        } );
-
-
+            $(document).ready( function () {
+                $('#tableData').DataTable({
+                    order: [[0, 'desc']],
+                    lengthMenu: [10, 20, 30, { label: 'All', value: -1 }]
+                });
+            } );
 
     }
 
