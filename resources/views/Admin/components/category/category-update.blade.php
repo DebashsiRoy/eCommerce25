@@ -18,7 +18,7 @@
                                 <br/>
                                 <label class="form-label mt-2">Image</label>
                                 <input oninput="oldImg.src=window.URL.createObjectURL(this.files[0])"  type="file" class="form-control" id="categoryImgUpDate">
-                                <input type="text"  id="updateID">
+                                <input type="text" class="d-none" id="updateID">
                                 <input type="text" class="d-none" id="filePath">
 
                             </div>

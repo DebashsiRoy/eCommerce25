@@ -22,8 +22,7 @@ Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('u
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     // Brand section
-    Route::get('/admin/brands', [BrandController::class, 'BrandList'])->name('all.brands');
-    Route::post('/admin/brands/create',[BrandController::class, 'BrandAdd'])->name('create.brand');
+
 
     // Category section
     Route::get('/category-page', [CategoryController::class, 'CategoryPage'])->name('category.index');
@@ -32,6 +31,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::post('/category-update', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
     Route::post('/category-delete', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
     Route::post('/category-by-id', [CategoryController::class, 'categoryByID'])->name('category.id');
+
+    // Brand section
+    Route::get('/brand-page', [BrandController::class, 'brandPage'])->name('brand.index');
+    Route::get('/brands-list', [BrandController::class, 'BrandList'])->name('all.brands');
+    Route::post('/admin/brands/create',[BrandController::class, 'BrandAdd'])->name('create.brand');
+    Route::post('/brand-delete', [BrandController::class, 'brandDelete'])->name('brand.delete');
+
 });
 
 

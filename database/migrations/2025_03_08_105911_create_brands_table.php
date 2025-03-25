@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('brandName');
-            $table->string('brandImg');
+            $table->string('brandName',50)->unique();
+            $table->string('brandImg',255);
+            $table->string('slug',50);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
