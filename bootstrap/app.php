@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/category-by-id',
             'http://127.0.0.1:8000/admin/brands/create',
             'http://127.0.0.1:8000/brand-delete',
+            'http://127.0.0.1:8000/brand-update',
 
         ]);
     })

@@ -11,7 +11,7 @@
                         <div class="row">
                             <h6>Once delete, you can't get it back</h6>
                             <div class="col-12 p-1">
-                                <input  id="deleteID" />
+                                <input class="d-none" id="deleteID" />
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
 
         if (res.data===1){
             successToast("Brand Deleted Successfully")
-            await getList();
+            await getBrandList();
         }
         else {
             errorToast("Brand is not deleted! ")

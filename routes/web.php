@@ -37,6 +37,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/brands-list', [BrandController::class, 'BrandList'])->name('all.brands');
     Route::post('/admin/brands/create',[BrandController::class, 'BrandAdd'])->name('create.brand');
     Route::post('/brand-delete', [BrandController::class, 'brandDelete'])->name('brand.delete');
+    Route::post('/brand-by-id', [BrandController::class, 'BrandByID'])->name('brand.id');
+    Route::post('/brand-update', [BrandController::class, 'BrandUpdate'])->name('brand.update');
 
 });
 

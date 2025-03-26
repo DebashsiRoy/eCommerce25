@@ -39,13 +39,23 @@ class BrandController extends Controller
        // Upload File
        $img->move(public_path('uploads/brands/'), $img_name);
 
-
-       return Brand::create([
-           'brandName' => $request->input('brandName'),
-           'brandImg' => $img_url,
-           'slug' => Str::slug($request->input('brandName')),
-           'user_id' => $userId,
-       ]);
+       try {
+           Brand::create([
+               'brandName' => $request->input('brandName'),
+               'brandImg' => $img_url,
+               'slug' => Str::slug($request->input('brandName')),
+               'user_id' => $userId,
+           ]);
+           return response()->json([
+               'status' => 'success',
+               'message' => 'Brand added successfully!'
+           ],200);
+       } catch (Exception $e){
+           return response()->json([
+               'status' => 'failed',
+               'message' => 'Enter Unique Brand Name'
+           ],200);
+       }
 
    }
 
@@ -72,5 +82,60 @@ class BrandController extends Controller
    }
 
 
+
+    // This section is for fill form by old data
+    function BrandByID(Request $request)
+    {
+        $user_id = Auth::id();
+        $brand_id=$request->input('id');
+        return Brand::where('id',$brand_id)->where('user_id',$user_id)->first();
+    }
+
+
+    public function BrandUpdate(Request $request)
+    {
+        $brand_id = $request->input('id');
+        $user_id = Auth::user()->id;
+        $brand = Brand::where('user_id', $user_id)->where('id', $brand_id)->first();
+
+        if ($request->hasFile('brandImg')) {
+            // Upload New File
+            $img = $request->file('brandImg');
+
+            $t = time();
+            $file_name = $img->getClientOriginalName();
+            $img_name = "{$brand_id}-{$user_id}-{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
+            $img_url = "uploads/brands/{$img_name}";
+            $img->move(public_path('uploads/brands/'), $img_name);
+
+            //Delete Old File
+//            $filePath = public_path($request->input('file_path')); // Convert to absolute path
+//
+//            if (File::exists($filePath)) { // Check if file exists before deleting
+//                File::delete($filePath);
+//            }
+
+            if ($brand && $brand->brandImg) {
+                // Assuming the stored path is something like 'uploads/category/image.jpg'
+                $filePath = public_path($brand->brandImg);
+
+                // Check if the file exists before deleting
+                if (File::exists($filePath)) {
+                    File::delete($filePath); // Delete the file
+                }
+            }
+
+            // Update Category
+            return Brand::where('id', $brand_id)->where('user_id', $user_id)->update([
+                'brandName' => $request->input('brandName'),
+                'brandImg' => $img_url,
+            ]);
+        } else {
+            // Only update category name if no file is uploaded
+            return Brand::where('id', $brand_id)->where('user_id', $user_id)->update([
+                'brandName' => $request->input('brandName')
+            ]);
+        }
+    }
 
 }

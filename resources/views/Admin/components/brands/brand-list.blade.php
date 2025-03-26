@@ -1,7 +1,7 @@
 <div class="container rounded-5">
     <div class="d-flex justify-content-between mt-5">
         <h4 class="category-title-bg">Brands</h4>
-        <button type="button" class="btn btn-primary fs-3 mb-5" data-bs-toggle="modal" data-bs-target="#addBrands">
+        <button type="button" class="btn btn-primary fs-3 mb-5" data-bs-toggle="modal" data-bs-target="#createBrand">
             Add Brands
         </button>
     </div>
@@ -34,9 +34,9 @@
     </div>
 </div>
 <script>
-    getList();
+    getBrandList();
 
-async function getList(){
+async function getBrandList(){
 
     showLoader();
     let res=await axios.get("/brands-list");
@@ -55,7 +55,7 @@ async function getList(){
                 <td><img src="${item['brandImg']}" alt="${item['brandName']}" width="40" height="35"></td>
                 <td>${item['slug']}</td>
                 <td>
-                    <button data-path="${item['brandImg']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</button>
+                    <button data-path="${item['brandImg']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updateBrand">Edit</button>
 
 <!--                    // ****************Read me *******************-->
 <!--                    ///why I don't create editBtn id for pic-up a category->id. Because has many class but id is unique.-->
@@ -76,6 +76,13 @@ async function getList(){
         let id= $(this).data('id');                 // delete button's id
         $("#deleteBrand").modal('show');         // Show delete modal
         $("#deleteID").val(id);                     // get id into the delete modal input field
+    })
+    $('.editBtn').on('click', async function () {
+        let id= $(this).data('id');
+        let filePath= $(this).data('path');
+        // This path get from html <button data-path="${item['categoryImg']}"
+        await FillUpUpdateForm(id,filePath)
+        $("updateCategory").modal('show');
     })
 
     $(document).ready( function () {
