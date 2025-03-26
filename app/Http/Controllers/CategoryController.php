@@ -78,6 +78,7 @@ class CategoryController extends Controller
     {
         $category_id = $request->input('id');
         $user_id = Auth::user()->id;
+        $category = Category::where('user_id', $user_id)->where('id', $category_id)->first();
 
         if ($request->hasFile('categoryImg')) {
             // Upload New File
@@ -85,7 +86,7 @@ class CategoryController extends Controller
 
             $t = time();
             $file_name = $img->getClientOriginalName();
-            $img_name = "{$user_id}-{$category_id}-{}-{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
+            $img_name = "{$user_id}-{$category_id}-{$t}-{$file_name}";  // {$user_id}-{$t}-{$file_name}
             $img_url = "uploads/category/{$img_name}";
             $img->move(public_path('uploads/category/'), $img_name);
 
@@ -95,8 +96,16 @@ class CategoryController extends Controller
 //            if (File::exists($filePath)) { // Check if file exists before deleting
 //                File::delete($filePath);
 //            }
-            $filePath = $request->input('file_path');
-            File::delete($filePath);
+
+            if ($category && $category->categoryImg) {
+                // Assuming the stored path is something like 'uploads/category/image.jpg'
+                $filePath = public_path($category->categoryImg);
+
+                // Check if the file exists before deleting
+                if (File::exists($filePath)) {
+                    File::delete($filePath); // Delete the file
+                }
+            }
 
             // Update Category
             return Category::where('id', $category_id)->where('user_id', $user_id)->update([

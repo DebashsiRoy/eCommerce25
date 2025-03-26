@@ -50,11 +50,27 @@ class BrandController extends Controller
    }
 
    public function brandDelete(Request $request){
-        $user_id = Auth::id();
-        $brand_id = $request->get('id');
-        $filePath = $request->input('file_path');
-        File::delete($filePath);
 
-        return Brand::where('id', $brand_id)->where('user_id', $user_id)->delete();
+       $brand_id = $request->input('id');
+       $user_id = Auth::user()->id;
+
+       // Retrieve the category record from the database
+       $brand = Brand::where('user_id', $user_id)->where('id', $brand_id)->first();
+
+       if ($brand && $brand->brandImg) {
+           // Assuming the stored path is something like 'uploads/category/image.jpg'
+           $filePath = public_path($brand->brandImg);
+
+           // Check if the file exists before deleting
+           if (File::exists($filePath)) {
+               File::delete($filePath); // Delete the file
+           }
+
+           // Now, delete the category from the database
+           return $brand->delete();
+       }
    }
+
+
+
 }

@@ -61,7 +61,7 @@ async function getList(){
 <!--                    ///why I don't create editBtn id for pic-up a category->id. Because has many class but id is unique.-->
 <!--                    // for this use HTML "data-id" attribute to get id in button-->
 
-                    <button data-path="${item['brandImg']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteCategory">Delete</button>
+                    <button data-path="${item['brandImg']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteBrand">Delete</button>
 
 <!--                    // ****************Read me *******************-->
 <!--                    ///why I don't create deleteBtn id for pic-up a category->id. Because has many class but id is unique.-->
@@ -71,6 +71,12 @@ async function getList(){
             </tr>`
         tableList.append(row)
     });
+
+    $('.deleteBtn').on('click', function (){
+        let id= $(this).data('id');                 // delete button's id
+        $("#deleteBrand").modal('show');         // Show delete modal
+        $("#deleteID").val(id);                     // get id into the delete modal input field
+    })
 
     $(document).ready( function () {
         $('#tableData').DataTable({
