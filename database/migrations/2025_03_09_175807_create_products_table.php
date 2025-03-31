@@ -23,9 +23,13 @@ return new class extends Migration
             $table->float('star');
             $table->enum('remark',['popular','new','top','special','trending','regular']);
 
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
 
+            $table->foreign('user_id')->references('id')->on('users')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
             $table->foreign('category_id')->references('id')->on('categories')
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();

@@ -9,9 +9,51 @@ use App\Models\ProductReview;
 use App\Models\ProductSlider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    function productIndex()
+    {
+        return view('Admin.pages.product');
+    }
+
+    public function ProductList(Request $request)
+    {
+        $user_id= Auth::user()->id;
+        return Product::where('user_id',$user_id)->orderBy('id','desc')->get();
+    }
+
+    // Add Method for create products
+    function createProduct(Request $request)
+    {
+        $user_id= Auth::id();
+
+        $img=$request->file('image');
+        $t=time();
+        $file_name= $img->getClientOriginalExtension();
+        $img_name="{$user_id}-{$t}_{$file_name}";
+        $img_url="uploads/product/{$img_name}";
+
+        $img->move(public_path('uploads/product/'), $img_name);
+
+        return Product::create([
+            'title'=>$request->input('title'),
+            'short_des'=>$request->input('short_des'),
+            'price'=>$request->input('price'),
+            'discount'=>$request->input('discount'),
+            'discount_price'=>$request->input('discount_price'),
+            "image"=>$img_url,
+            'stock'=>$request->input('stock'),
+            'star'=>$request->input('star'),
+            'remark'=>$request->input('remark'),
+            'user_id'=>$user_id,
+            'category_id'=>$request->input('category_id'),
+            'brand_id'=>$request->input('brand_id'),
+        ]);
+
+    }
+
     public function ListProductCategory(Request $request):JsonResponse
     {
         $data=Product::where('category_id', $request->id)->with('brand', 'category')->get();

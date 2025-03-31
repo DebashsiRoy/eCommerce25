@@ -2,6 +2,8 @@
 
 return [
 
+    App\Providers\OctaneServiceProvider::class,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

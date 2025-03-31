@@ -18,7 +18,8 @@ class Product extends Model
         'star',
         'remark',
         'category_id',
-        'brand_id'
+        'brand_id',
+        'user_id'
     ];
 
     public function brand(): BelongsTo
