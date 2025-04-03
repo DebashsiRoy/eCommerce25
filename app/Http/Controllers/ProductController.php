@@ -10,6 +10,7 @@ use App\Models\ProductSlider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -37,22 +38,28 @@ class ProductController extends Controller
 
         $img->move(public_path('uploads/product/'), $img_name);
 
+        $ProductPrice=$request->input('price');
+        $ProductDiscount=$request->input('discount');
+        $discountPrice= $ProductPrice-$ProductDiscount;
+
         return Product::create([
             'title'=>$request->input('title'),
             'short_des'=>$request->input('short_des'),
             'price'=>$request->input('price'),
             'discount'=>$request->input('discount'),
-            'discount_price'=>$request->input('discount_price'),
+            'discount_price'=> $discountPrice,
             "image"=>$img_url,
             'stock'=>$request->input('stock'),
             'star'=>$request->input('star'),
-            'remark'=>$request->input('remark'),
             'user_id'=>$user_id,
             'category_id'=>$request->input('category_id'),
             'brand_id'=>$request->input('brand_id'),
         ]);
 
     }
+
+
+
 
     public function ListProductCategory(Request $request):JsonResponse
     {

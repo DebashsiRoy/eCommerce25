@@ -51,6 +51,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/products-list', [ProductController::class, 'ProductList'])->name('product.list');
     Route::post('/product-crate', [ProductController::class, 'createProduct'])->name('product.create');
 
+
 });
 
 
