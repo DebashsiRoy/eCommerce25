@@ -49,7 +49,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     // Products Section
     Route::get('/products-page', [ProductController::class, 'productIndex'])->name('product.page');
     Route::get('/products-list', [ProductController::class, 'ProductList'])->name('product.list');
-    Route::post('/product-crate', [ProductController::class, 'createProduct'])->name('product.create');
+    Route::post('/product-create', [ProductController::class, 'createProduct'])->name('product.create');
+    Route::post('/product-update', [ProductController::class, 'updateProduct'])->name('product.update');
 
 
 });

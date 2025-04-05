@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -51,11 +52,74 @@ class ProductController extends Controller
             "image"=>$img_url,
             'stock'=>$request->input('stock'),
             'star'=>$request->input('star'),
+            'remark'=>$request->input('remark'),
             'user_id'=>$user_id,
             'category_id'=>$request->input('category_id'),
             'brand_id'=>$request->input('brand_id'),
         ]);
 
+    }
+
+    function updateProduct(Request $request)
+    {
+        $user_id= Auth::id();
+        $product_id=$request->input('id');
+        $product= Product::where('user_id',$user_id)->where('id',$product_id)->first();
+
+        if ($request->hasFile('image')) {
+            // Upload New File
+            $img=$request->file('image');
+            $t=time();
+            $file_name= $img->getClientOriginalExtension();
+            $img_name="{$user_id}-{$t}_{$file_name}";
+            $img_url="uploads/product/{$img_name}";
+
+            $img->move(public_path('uploads/product/'), $img_name);
+
+            $ProductPrice=$request->input('price');
+            $ProductDiscount=$request->input('discount');
+            $discountPrice= $ProductPrice-$ProductDiscount;
+            // Delete old image
+            if ($product && $product->image){
+                $filePath = public_path($product->image);
+                if (File::exists($filePath)){
+                    File::delete($filePath);
+                }
+            }
+
+            return Product::where('id',$product_id)->where('user_id',$user_id)->update([
+                'title'=>$request->input('title'),
+                'short_des'=>$request->input('short_des'),
+                'price'=>$request->input('price'),
+                'discount'=>$request->input('discount'),
+                'discount_price'=> $discountPrice,
+                "image"=>$img_url,
+                'stock'=>$request->input('stock'),
+                'star'=>$request->input('star'),
+                'remark'=>$request->input('remark'),
+                'user_id'=>$user_id,
+                'category_id'=>$request->input('category_id'),
+                'brand_id'=>$request->input('brand_id'),
+            ]);
+        }
+        else {
+            $ProductPrice=$request->input('price');
+            $ProductDiscount=$request->input('discount');
+            $discountPrice= $ProductPrice-$ProductDiscount;
+            return Product::where('id',$product_id)->where('user_id',$user_id)->update([
+                'title'=>$request->input('title'),
+                'short_des'=>$request->input('short_des'),
+                'price'=>$request->input('price'),
+                'discount'=>$request->input('discount'),
+                'discount_price'=> $discountPrice,
+                'stock'=>$request->input('stock'),
+                'star'=>$request->input('star'),
+                'remark'=>$request->input('remark'),
+                'user_id'=>$user_id,
+                'category_id'=>$request->input('category_id'),
+                'brand_id'=>$request->input('brand_id'),
+            ]);
+        }
     }
 
 

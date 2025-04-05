@@ -34,10 +34,10 @@
                                         <label class="form-label fs-2 pt-3">Product Title</label>
                                         <input type="text" class="form-control addCatName border border-info" id="productTitle">
                                     </div>
-                                        <div class="col">
-                                            <label class="form-label fs-2 pt-3">Short Description</label>
-                                            <input type="text" class="form-control addCatName border border-info" id="productShortDes">
-                                        </div>
+                                    <div class="col">
+                                        <label class="form-label fs-2 pt-3">Short Description</label>
+                                        <input type="text" class="form-control addCatName border border-info" id="productShortDes">
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -48,6 +48,22 @@
                                     <div class="col">
                                         <label class="form-label fs-2 pt-3">Discount</label>
                                         <input type="text" class="form-control addCatName border border-info" id="productDiscount">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label fs-2 pt-3">Remark</label>
+                                        <select class="form-select addCatName" id="remarkSelect">
+                                            <option value="popular" selected>popular</option>
+                                            <option value="new" >new</option>
+                                            <option value="top" >top</option>
+                                            <option value="special" >special</option>
+                                            <option value="trending" >trending</option>
+                                            <option value="regular" >regular</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
                                     </div>
                                 </div>
 
@@ -74,33 +90,40 @@
             </div>
             <div class="modal-footer px-5">
                 <button type="button" id="modal-close" class="btn btn-secondary fs-3 border-radius-10" data-bs-dismiss="modal">Close</button>
-                <button onclick="Save()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Save changes</button>
+                <button onclick="add()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     // Fill-up
-    FillCategoryDropDown();
-    async function FillCategoryDropDown(){
-        let res=await axios.get("/category-list")
-        res.data.forEach(function (item, i){
-            let option=`<option value="${item['id']}" selected>${item['categoryName']}</option>`
-            $("#categorySelect").append(option);
-        })
-    }
 
-    FillBrandDropDown();
-    async function FillBrandDropDown(){
-        let res=await axios.get("/brands-list")
-        res.data.forEach(function (item, i){
-            let option=`<option value="${item['id']}" selected>${item['brandName']}</option>`
-            $("#brandSelect").append(option);
-        })
+    async function FillCategoryDropDown() {
+        let categorySelect = document.getElementById("categorySelect");
+        categorySelect.innerHTML = '<option value="" selected>Choose Category</option>'; // clear existing options
+
+        let res = await axios.get("/category-list");
+        res.data.forEach(function (item) {
+            let option = `<option value="${item['id']}">${item['categoryName']}</option>`;
+            categorySelect.innerHTML += option;
+        });
     }
 
 
-    async function Save() {
+    async function FillBrandDropDown() {
+        let brandSelect = document.getElementById("brandSelect");
+        brandSelect.innerHTML = '<option value="" selected>Choose Brand</option>'; // clear existing options
+
+        let res = await axios.get("/brands-list");
+        res.data.forEach(function (item) {
+            let option = `<option value="${item['id']}">${item['brandName']}</option>`;
+            brandSelect.innerHTML += option;
+        });
+    }
+
+
+
+    async function add() {
         let categorySelect = document.getElementById('categorySelect').value;
         let brandSelect = document.getElementById('brandSelect').value;
         let productTitle = document.getElementById('productTitle').value;
@@ -109,6 +132,7 @@
         let productDiscount = document.getElementById('productDiscount').value;
         let productStock = document.getElementById('productStock').value;
         let productStar = document.getElementById('productStar').value;
+        let remarkSelect = document.getElementById('remarkSelect').value;
         let productImg = document.getElementById('productImg').files[0];
 
 
@@ -136,6 +160,9 @@
         else if (productStar.length===0){
             errorToast("Enter your product Star!")
         }
+        else if (remarkSelect.length===0){
+            errorToast("Enter your product Star!")
+        }
         else if (productImg.length===0){
             errorToast("Enter your product Image!")
         }
@@ -151,6 +178,7 @@
             formData.append('discount', productDiscount);
             formData.append('stock', productStock);
             formData.append('star', productStar);
+            formData.append('remark', remarkSelect);
             formData.append('image', productImg);
 
             const config = {
@@ -159,29 +187,24 @@
                 }
             };
 
-            showLoader();
             try {
-                let res = await axios.post("/product-crate", formData, config);
-                console.log("Response:", res);
-
+                let res = await axios.post("/product-create", formData, config);
                 hideLoader();
-                if (res.status === 201) {
+
+                if (res.status === 200 || res.status === 201) {
                     successToast("Product Added Successfully!");
-                    document.getElementById("save-form").reset();
+                    document.getElementById('save-form').reset();
                     await getList();
                 } else {
                     errorToast("Product is not added!");
                 }
             } catch (error) {
                 hideLoader();
-                console.error("Error:", error.response);
-                errorToast("Failed to add product!");
+                console.error("Add Product Error:", error.response || error);
+                errorToast("Something went wrong! Check console.");
             }
-
         }
-
     }
-
 
 
 </script>
@@ -239,25 +262,3 @@
         border-color: lightskyblue;
     }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
