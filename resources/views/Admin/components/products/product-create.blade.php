@@ -90,7 +90,7 @@
             </div>
             <div class="modal-footer px-5">
                 <button type="button" id="modal-close" class="btn btn-secondary fs-3 border-radius-10" data-bs-dismiss="modal">Close</button>
-                <button onclick="add()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Save changes</button>
+                <button onclick="create()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Save changes</button>
             </div>
         </div>
     </div>
@@ -121,87 +121,79 @@
         });
     }
 
-
-
-    async function add() {
-        let categorySelect = document.getElementById('categorySelect').value;
-        let brandSelect = document.getElementById('brandSelect').value;
-        let productTitle = document.getElementById('productTitle').value;
-        let productShortDes = document.getElementById('productShortDes').value;
-        let productPrice = document.getElementById('productPrice').value;
-        let productDiscount = document.getElementById('productDiscount').value;
-        let productStock = document.getElementById('productStock').value;
-        let productStar = document.getElementById('productStar').value;
-        let remarkSelect = document.getElementById('remarkSelect').value;
+    async function create(){
+        let categorySelect =document.getElementById('categorySelect').value;
+        let brandSelect =document.getElementById('brandSelect').value;
+        let productTitle =document.getElementById('productTitle').value;
+        let productShortDes =document.getElementById('productShortDes').value;
+        let productPrice =document.getElementById('productPrice').value;
+        let productDiscount =document.getElementById('productDiscount').value;
+        let remarkSelect =document.getElementById('remarkSelect').value;
+        let productStock =document.getElementById('productStock').value;
+        let productStar =document.getElementById('productStar').value;
         let productImg = document.getElementById('productImg').files[0];
 
-
         if (categorySelect.length===0){
-            errorToast("Please select category !")
+            errorToast("Category Name Required !")
         }
         else if (brandSelect.length===0){
-            errorToast("Please select Brand !")
+            errorToast("Brand Name is required !")
         }
         else if (productTitle.length===0){
-            errorToast("Please add a Title for your product!")
+            errorToast("Product Name is required !")
         }
         else if (productShortDes.length===0){
-            errorToast("Please Enter your product short description!")
+            errorToast("Product Short Description is required !")
         }
         else if (productPrice.length===0){
-            errorToast("Enter your product price!")
+            errorToast("Product Price is required !")
         }
         else if (productDiscount.length===0){
-            errorToast("Enter your product discount!")
-        }
-        else if (productStock.length===0){
-            errorToast("Enter your product stock!")
-        }
-        else if (productStar.length===0){
-            errorToast("Enter your product Star!")
+            errorToast("Product Discount is required !")
         }
         else if (remarkSelect.length===0){
-            errorToast("Enter your product Star!")
+            errorToast("Product Remark is required !")
         }
-        else if (productImg.length===0){
-            errorToast("Enter your product Image!")
+        else if (productStock.length===0){
+            errorToast("Product Stock is required !")
+        }
+        else if (productStar.length===0){
+            errorToast("Product Star is required !")
+        }
+        else if (!productImg){
+            errorToast("Product Image is required !")
         }
         else {
             document.getElementById('modal-close').click();
 
-            let formData = new FormData();
-            formData.append('category_id', categorySelect);
-            formData.append('brand_id', brandSelect);
-            formData.append('title', productTitle);
-            formData.append('short_des', productShortDes);
-            formData.append('price', productPrice);
-            formData.append('discount', productDiscount);
-            formData.append('stock', productStock);
-            formData.append('star', productStar);
-            formData.append('remark', remarkSelect);
-            formData.append('image', productImg);
-
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            let formData=new FormData();
+            formData.append('category_id', categorySelect)
+            formData.append('brand_id', brandSelect)
+            formData.append('title', productTitle)
+            formData.append('short_des', productShortDes)
+            formData.append('price', productPrice)
+            formData.append('discount', productDiscount)
+            formData.append('remark', remarkSelect)
+            formData.append('stock', productStock)
+            formData.append('star', productStar)
+            formData.append('image', productImg)
+            const config ={
+                headers:{
+                    'content-type':'multipart/form-data'
                 }
-            };
+            }
 
-            try {
-                let res = await axios.post("/product-create", formData, config);
-                hideLoader();
+            showLoader();
+            let res= await axios.post("/product-create", formData, config)
+            hideLoader();
 
-                if (res.status === 200 || res.status === 201) {
-                    successToast("Product Added Successfully!");
-                    document.getElementById('save-form').reset();
-                    await getList();
-                } else {
-                    errorToast("Product is not added!");
-                }
-            } catch (error) {
-                hideLoader();
-                console.error("Add Product Error:", error.response || error);
-                errorToast("Something went wrong! Check console.");
+            if (res.status===201){
+                successToast("Product Added Successfully");
+                document.getElementById('save-form').reset();
+                await getList();
+            }
+            else {
+                errorToast("Product is not Added !")
             }
         }
     }

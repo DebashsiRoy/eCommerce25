@@ -12,3 +12,4 @@
 <script src="{{ asset('admin/js/jvectormap-1.2.2.min.js') }}"></script>
 <script src="{{ asset('admin/js/morris.min.js') }}"></script>
 <script src="{{ asset('admin/js/raphael.min.js') }}"></script>
+<script src="{{ asset('admin/js/flasher.min.js') }}"></script>
