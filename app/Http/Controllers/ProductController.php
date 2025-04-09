@@ -26,14 +26,23 @@ class ProductController extends Controller
         return Product::where('user_id',$user_id)->orderBy('id','desc')->get();
     }
 
+    public function productById(Request $request)
+    {
+        $user_id=Auth::id();
+        $product_id=$request->input('id');
+
+        return Product::where('user_id',$user_id)->where('id',$product_id)->first();
+    }
     // Add Method for create products
     function createProduct(Request $request)
     {
         $user_id= Auth::id();
 
+        // Prepaid file Name & Path
         $img=$request->file('image');
+        // Pic-up current time
         $t=time();
-        $file_name= $img->getClientOriginalExtension();
+        $file_name= $img->getClientOriginalName();
         $img_name="{$user_id}-{$t}_{$file_name}";
         $img_url="uploads/product/{$img_name}";
 
@@ -41,7 +50,13 @@ class ProductController extends Controller
 
         $ProductPrice=$request->input('price');
         $ProductDiscount=$request->input('discount');
-        $discountPrice= $ProductPrice-$ProductDiscount;
+
+        $ProductPrice = floatval($ProductPrice);
+        $ProductDiscount = floatval($ProductDiscount);
+
+        $discountPrice= $ProductPrice-($ProductPrice*($ProductDiscount/100));
+        $discountPrice = round($discountPrice, 2);
+
 
         return Product::create([
             'title'=>$request->input('title'),
@@ -70,7 +85,7 @@ class ProductController extends Controller
             // Upload New File
             $img=$request->file('image');
             $t=time();
-            $file_name= $img->getClientOriginalExtension();
+            $file_name= $img->getClientOriginalName();
             $img_name="{$user_id}-{$t}_{$file_name}";
             $img_url="uploads/product/{$img_name}";
 
@@ -78,7 +93,14 @@ class ProductController extends Controller
 
             $ProductPrice=$request->input('price');
             $ProductDiscount=$request->input('discount');
-            $discountPrice= $ProductPrice-$ProductDiscount;
+
+            $ProductPrice = floatval($ProductPrice);
+            $ProductDiscount = floatval($ProductDiscount);
+
+            $discountPrice= $ProductPrice-($ProductPrice*($ProductDiscount/100));
+            $discountPrice = round($discountPrice, 2);
+
+
             // Delete old image
             if ($product && $product->image){
                 $filePath = public_path($product->image);
@@ -103,9 +125,16 @@ class ProductController extends Controller
             ]);
         }
         else {
+
             $ProductPrice=$request->input('price');
             $ProductDiscount=$request->input('discount');
-            $discountPrice= $ProductPrice-$ProductDiscount;
+
+            $ProductPrice = floatval($ProductPrice);
+            $ProductDiscount = floatval($ProductDiscount);
+
+            $discountPrice= $ProductPrice-($ProductPrice*($ProductDiscount/100));
+            $discountPrice = round($discountPrice, 2);
+
             return Product::where('id',$product_id)->where('user_id',$user_id)->update([
                 'title'=>$request->input('title'),
                 'short_des'=>$request->input('short_des'),
@@ -123,6 +152,14 @@ class ProductController extends Controller
     }
 
 
+    public function deleteProduct(Request $request)
+    {
+        $user_id= Auth::id();
+        $product_id=$request->input('id');
+        $filePath = $request->input('file_path');
+        File::delete($filePath);
+        return Product::where('id',$product_id)->where('user_id',$user_id)->delete();
+    }
 
 
     public function ListProductCategory(Request $request):JsonResponse

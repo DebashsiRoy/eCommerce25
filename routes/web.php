@@ -51,6 +51,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/products-list', [ProductController::class, 'ProductList'])->name('product.list');
     Route::post('/product-create', [ProductController::class, 'createProduct'])->name('product.create');
     Route::post('/product-update', [ProductController::class, 'updateProduct'])->name('product.update');
+    Route::post('/product-by-id', [ProductController::class, 'productById'])->name('product.byID');
+    Route::post('/product-delete', [ProductController::class, 'deleteProduct'])->name('product.delete');
 
 
 });

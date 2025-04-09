@@ -7,13 +7,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'dk Shop') }}</title>
     @include('Admin.components.css')
-    @include('Admin.components.js')
+    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/js/axios.min.js') }}"></script>
+    <script src="{{ asset('admin/js/toastify-js.js') }}"></script>
+    <script src="{{ asset('admin/js/config.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/js/main.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/flasher.min.js') }}"></script>
 
-    @stack('scripts')
-
-    @stack('styles')
 
 </head>
 
@@ -22,13 +26,6 @@
 <div id="wrapper">
     <div id="page" class="">
         <div class="layout-wrap">
-
-            <!-- <div id="preload" class="preload-container">
-<div class="preloading">
-    <span></span>
-</div>
-</div> -->
-
 
             <div class="section-content-right">
                 @include('Admin.components.left-nav')
@@ -43,7 +40,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 

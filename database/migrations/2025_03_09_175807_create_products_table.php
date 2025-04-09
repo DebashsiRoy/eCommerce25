@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('title',200);
             $table->string('short_des',500);
             $table->string('price',50);
-            $table->boolean('discount');
+            $table->string('discount',500);
             $table->string('discount_price',50);
             $table->string('image',200);
-            $table->boolean('stock');
+            $table->string('stock',100);
             $table->float('star');
             $table->enum('remark',['popular','new','top','special','trending','regular']);
 
@@ -48,4 +48,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('products');
     }
+
+
 };

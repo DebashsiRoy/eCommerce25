@@ -13,7 +13,7 @@
             <div class="center-heading">Main Home</div>
             <ul class="menu-list">
                 <li class="menu-item">
-                    <a href="{{ route('home.index') }}" class="">
+                    <a href="{{ route('home.index') }}" class="" target="_blank">
                         <div class="icon"><i class="icon-shopping-bag"></i></div>
                         <div class="text">View Shop</div>
                     </a>

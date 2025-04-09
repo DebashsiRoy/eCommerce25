@@ -79,11 +79,12 @@
                                     </div>
                                 </div>
 
-                                <img class="w-15" id="newImg" src="{{asset('admin/images/default.jpg')}}"/>
+                                <img class="w-15" id="oldImg" src="{{asset('admin/images/default.jpg')}}"/>
                                 <br/>
                                 <label class="form-label fs-2">Category Image</label>
-                                <input oninput="newImg.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="productImg">
-
+                                <input oninput="oldImg.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="productImg">
+                                <input type="text" class="" id="updateID">
+                                <input type="text" class="" id="filePath">
                             </div>
                         </div>
                     </div>
@@ -91,122 +92,12 @@
             </div>
             <div class="modal-footer px-5">
                 <button type="button" id="modal-close" class="btn btn-secondary fs-3 border-radius-10" data-bs-dismiss="modal">Close</button>
-                <button onclick="Save()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Update Product</button>
+                <button onclick="FillUpUpdateForm()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Update Product</button>
             </div>
         </div>
     </div>
 </div>
-<script>
-    // Fill-up
-    FillCategoryDropDown();
-    async function FillCategoryDropDown(){
-        let res=await axios.get("/category-list")
-        res.data.forEach(function (item, i){
-            let option=`<option value="${item['id']}" selected>${item['categoryName']}</option>`
-            $("#categorySelect").append(option);
-        })
-    }
 
-    FillBrandDropDown();
-    async function FillBrandDropDown(){
-        let res=await axios.get("/brands-list")
-        res.data.forEach(function (item, i){
-            let option=`<option value="${item['id']}" selected>${item['brandName']}</option>`
-            $("#brandSelect").append(option);
-        })
-    }
-
-
-    async function Save() {
-        let categorySelect = document.getElementById('categorySelect').value;
-        let brandSelect = document.getElementById('brandSelect').value;
-        let productTitle = document.getElementById('productTitle').value;
-        let productShortDes = document.getElementById('productShortDes').value;
-        let productPrice = document.getElementById('productPrice').value;
-        let productDiscount = document.getElementById('productDiscount').value;
-        let productStock = document.getElementById('productStock').value;
-        let productStar = document.getElementById('productStar').value;
-        let productRemark = document.getElementById('productRemark').value;
-        let productImg = document.getElementById('productImg').files[0];
-
-
-        if (categorySelect.length===0){
-            errorToast("Please select category !")
-        }
-        else if (brandSelect.length===0){
-            errorToast("Please select Brand !")
-        }
-        else if (productTitle.length===0){
-            errorToast("Please add a Title for your product!")
-        }
-        else if (productShortDes.length===0){
-            errorToast("Please Enter your product short description!")
-        }
-        else if (productPrice.length===0){
-            errorToast("Enter your product price!")
-        }
-        else if (productDiscount.length===0){
-            errorToast("Enter your product discount!")
-        }
-        else if (productStock.length===0){
-            errorToast("Enter your product stock!")
-        }
-        else if (productStar.length===0){
-            errorToast("Enter your product Star!")
-        }
-        else if (productRemark.length===0){
-            errorToast("Enter your product Star!")
-        }
-        else if (productImg.length===0){
-            errorToast("Enter your product Image!")
-        }
-        else {
-            document.getElementById('modal-close').click();
-
-            let formData = new FormData();
-            formData.append('category_id', categorySelect);
-            formData.append('brand_id', brandSelect);
-            formData.append('title', productTitle);
-            formData.append('short_des', productShortDes);
-            formData.append('price', productPrice);
-            formData.append('discount', productDiscount);
-            formData.append('stock', productStock);
-            formData.append('star', productStar);
-            formData.append('remark', productRemark);
-            formData.append('image', productImg);
-
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            };
-
-            showLoader();
-            try {
-                let res = await axios.post("/product-crate", formData, config);
-                console.log("Response:", res);
-
-                hideLoader();
-                if (res.status === 201) {
-                    successToast("Product Added Successfully!");
-                    document.getElementById("save-form").reset();
-                    await getList();
-                } else {
-                    errorToast("Product is not added!");
-                }
-            } catch (error) {
-                hideLoader();
-                console.error("Error:", error.response);
-                errorToast("Failed to add product!");
-            }
-
-        }
-
-    }
-
-
-
-</script>
 
 <style>
     img#newImg {

@@ -87,13 +87,14 @@
 
         $(document).ready( function () {
             $('#tableData').DataTable({
-                // order: [[0, 'desc']],
+                order: [[0, 'desc']],
                 lengthMenu: [10, 20, 30, { label: 'All', value: -1 }]
             });
         } );
 
-    }
 
+
+    }
 
 </script>
 <style>

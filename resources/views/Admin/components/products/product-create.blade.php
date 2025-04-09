@@ -46,7 +46,7 @@
                                         <input type="text" class="form-control addCatName border border-info" id="productPrice">
                                     </div>
                                     <div class="col">
-                                        <label class="form-label fs-2 pt-3">Discount</label>
+                                        <label class="form-label fs-2 pt-3">Discount(%)</label>
                                         <input type="text" class="form-control addCatName border border-info" id="productDiscount">
                                     </div>
                                 </div>
@@ -98,26 +98,25 @@
 <script>
     // Fill-up
 
+
+
+    FillCategoryDropDown();
     async function FillCategoryDropDown() {
-        let categorySelect = document.getElementById("categorySelect");
-        categorySelect.innerHTML = '<option value="" selected>Choose Category</option>'; // clear existing options
 
         let res = await axios.get("/category-list");
-        res.data.forEach(function (item) {
-            let option = `<option value="${item['id']}">${item['categoryName']}</option>`;
-            categorySelect.innerHTML += option;
+        res.data.forEach(function (item,i) {
+            let option = `<option value="${item['id']}">${item['categoryName']}</option>`
+            $("#categorySelect").append(option);
         });
     }
 
 
+    FillBrandDropDown();
     async function FillBrandDropDown() {
-        let brandSelect = document.getElementById("brandSelect");
-        brandSelect.innerHTML = '<option value="" selected>Choose Brand</option>'; // clear existing options
-
         let res = await axios.get("/brands-list");
         res.data.forEach(function (item) {
-            let option = `<option value="${item['id']}">${item['brandName']}</option>`;
-            brandSelect.innerHTML += option;
+            let option = `<option value="${item['id']}">${item['brandName']}</option>`
+            $("#brandSelect").append(option);
         });
     }
 
@@ -142,9 +141,10 @@
         else if (productTitle.length===0){
             errorToast("Product Name is required !")
         }
-        else if (productShortDes.length===0){
-            errorToast("Product Short Description is required !")
+        else if (productDiscount.length === 0 || productDiscount < 0 || productDiscount > 100) {
+            errorToast("Product Discount must be between 0% and 100%");
         }
+
         else if (productPrice.length===0){
             errorToast("Product Price is required !")
         }
@@ -166,25 +166,25 @@
         else {
             document.getElementById('modal-close').click();
 
-            let formData=new FormData();
-            formData.append('category_id', categorySelect)
-            formData.append('brand_id', brandSelect)
-            formData.append('title', productTitle)
-            formData.append('short_des', productShortDes)
-            formData.append('price', productPrice)
-            formData.append('discount', productDiscount)
-            formData.append('remark', remarkSelect)
-            formData.append('stock', productStock)
-            formData.append('star', productStar)
-            formData.append('image', productImg)
-            const config ={
-                headers:{
-                    'content-type':'multipart/form-data'
-                }
+            let formData = {
+                category_id: categorySelect,
+                brand_id: brandSelect,
+                title: productTitle,
+                short_des: productShortDes,
+                price: productPrice,
+                discount: productDiscount,
+                remark: remarkSelect,
+                stock: productStock,
+                star: productStar,
+                image: productImg,
             }
 
             showLoader();
-            let res= await axios.post("/product-create", formData, config)
+            let res= await axios.post("/product-create", formData,{
+                headers:{
+                    'content-type':'multipart/form-data'
+                }
+            })
             hideLoader();
 
             if (res.status===201){
