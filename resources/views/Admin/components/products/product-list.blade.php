@@ -55,7 +55,7 @@
             let row=`<tr>
                 <td>${index+1}</td>
                 <td>${item['title']}</td>
-                <td class="productShortDes p-4">${item['short_des']}</td>
+                <td class="productShortDes p-4"><p class="product_des">${item['short_des']}</p></td>
                 <td>${item['price']}</td>
                 <td>${item['discount']}</td>
                 <td>${item['discount_price']}</td>
@@ -65,7 +65,7 @@
                 <td>${item['remark']}</td>
                 <td>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updatedProduct">Edit</button>
-                    <button data-path="${item['image']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteCategory">Delete</button>
+                    <button data-path="${item['image']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
                 </td>
             </tr>`
             tableList.append(row)
@@ -80,9 +80,13 @@
         })
 
         $('.deleteBtn').on('click', function (){
-            let id= $(this).data('id');                 // delete button's id
-            $("#deleteCategory").modal('show');         // Show delete modal
-            $("#deleteID").val(id);                     // get id into the delete modal input field
+            let id= $(this).data('id');
+            let path=$(this).data('path');
+            $("#deleteProduct").modal('show');         // Show delete modal
+            $("#deleteID").val(id);
+            $("#deleteFilePath").val(path);
+
+            // get id into the delete modal input field
         })
 
         $(document).ready( function () {

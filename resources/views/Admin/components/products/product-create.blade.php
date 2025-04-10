@@ -219,7 +219,7 @@
         border-width: 3px;
     }
     .modal-content {
-        width: 850px;
+        width: 100%;
         padding: 15px;
         border-radius: 10px;
         border-block-color: lightskyblue;
