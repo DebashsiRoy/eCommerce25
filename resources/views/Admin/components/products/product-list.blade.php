@@ -71,11 +71,12 @@
             tableList.append(row)
         });
 
+
+
         $('.editBtn').on('click', async function () {
             let id= $(this).data('id');
             let filePath= $(this).data('path');
-            // This path get from html <button data-path="${item['categoryImg']}"
-            await FillUpUpdateForm(id,filePath)
+            await FillUpdatedFormProduct(id,filePath)
             $("updatedProduct").modal('show');
         })
 

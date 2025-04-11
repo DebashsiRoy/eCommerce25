@@ -3,7 +3,7 @@
 <!-- Modal -->
 <div class="modal fade border-radius-4" id="createProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content createModal">
             <div class="modal-header px-5">
                 <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -97,9 +97,6 @@
 </div>
 <script>
     // Fill-up
-
-
-
     FillCategoryDropDown();
     async function FillCategoryDropDown() {
 
@@ -212,18 +209,20 @@
         border-width: 3px;
     }
 
+    .modal-content.createModal {
+        width: 850px !important;
+        padding: 15px;
+        border-radius: 10px;
+        border-block-color: lightskyblue;
+        align-content: inherit;
+    }
     #categoryImg {
         padding: 12px;
         border-radius: 10px;
         border-color: lightskyblue;
         border-width: 3px;
     }
-    .modal-content {
-        width: 100%;
-        padding: 15px;
-        border-radius: 10px;
-        border-block-color: lightskyblue;
-    }
+
     .form-label.fs-2 {
         padding: 0 0 15px 0;
     }
@@ -239,7 +238,7 @@
     .d-flex.justify-content-between.mt-5 {
         width: 98%;
     }
-    #productRemark {
+    #remarkSelect {
         font-size: initial;
         padding: 5px;
         border-radius: 10px;
