@@ -54,6 +54,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::post('/product-by-id', [ProductController::class, 'productById'])->name('product.byID');
     Route::post('/product-delete', [ProductController::class, 'deleteProduct'])->name('product.delete');
 
+    // Product Details
+    Route::post('/product-add-details', [ProductController::class, 'addProductDetails'])->name('product.addDetails');
+    Route::post('/product-delete-details', [ProductController::class, 'deleteProductDetails'])->name('product.detailsDetails');
+
 
 });
 
