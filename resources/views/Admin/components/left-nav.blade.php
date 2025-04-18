@@ -30,12 +30,29 @@
         </div>
         <div class="center-item">
             <ul class="menu-list">
-                <li class="menu-item">
-                    <a href="{{ route('product.page') }}" class="menu-item-button">
+
+
+                <li class="menu-item has-children">
+                    <a href="javascript:void(0);" class="menu-item-button">
                         <div class="icon"><i class="icon-shopping-cart"></i></div>
                         <div class="text">Products</div>
                     </a>
+                    <ul class="sub-menu">
+                        <li class="sub-menu-item">
+                            <a href="{{ route('product.page') }}" class="menu-item-button">
+                                <div class="icon"><i class="icon-shopping-cart"></i></div>
+                                <div class="text">Products</div>
+                            </a>
+                        </li>
+                        <li class="sub-menu-item">
+                            <a href="{{ route('product.details') }}" class="menu-item-button">
+                                <div class="icon"><i class="icon-shopping-cart"></i></div>
+                                <div class="text">Products Details</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="menu-item">
                     <a href="{{ route('brand.index') }}" class="menu-item-button">
                         <div class="icon"><i class="icon-layers"></i></div>

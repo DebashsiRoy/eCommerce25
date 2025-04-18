@@ -69,6 +69,9 @@ class ProductController extends Controller
             'stock'=>$request->input('stock'),
             'star'=>$request->input('star'),
             'remark'=>$request->input('remark'),
+            'description'=>$request->input('description'),
+            'color'=>$request->input('color'),
+            'size'=>$request->input('size'),
             'user_id'=>$user_id,
             'category_id'=>$request->input('category_id'),
             'brand_id'=>$request->input('brand_id'),
@@ -292,25 +295,3 @@ class ProductController extends Controller
         return ResponseHelper::Out('success', $data, 200);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

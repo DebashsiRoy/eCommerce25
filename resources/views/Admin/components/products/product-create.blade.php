@@ -39,6 +39,19 @@
                                         <input type="text" class="form-control addCatName border border-info" id="productShortDes">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label fs-2 pt-3">Product Description</label>
+                                        <textarea type="text" class="form-control addCatName border border-info" id="productDes" rows="4" cols="50"></textarea>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label fs-2 pt-3">Product Color</label>
+                                        <input type="text" class="form-control addCatName border border-info" id="productColor">
+                                        <br>
+                                        <label class="form-label fs-2 pt-3">Product Size</label>
+                                        <input type="text" class="form-control addCatName border border-info" id="productSize">
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col">
@@ -122,6 +135,9 @@
         let brandSelect =document.getElementById('brandSelect').value;
         let productTitle =document.getElementById('productTitle').value;
         let productShortDes =document.getElementById('productShortDes').value;
+        let productDes =document.getElementById('productDes').value;
+        let productColor =document.getElementById('productColor').value;
+        let productSize =document.getElementById('productSize').value;
         let productPrice =document.getElementById('productPrice').value;
         let productDiscount =document.getElementById('productDiscount').value;
         let remarkSelect =document.getElementById('remarkSelect').value;
@@ -137,6 +153,18 @@
         }
         else if (productTitle.length===0){
             errorToast("Product Name is required !")
+        }
+        else if (productShortDes.length===0){
+            errorToast("Enter your product short discount !")
+        }
+        else if (productDes.length===0){
+            errorToast("Enter your product discount !")
+        }
+        else if (productColor.length===0){
+            errorToast("Enter your product Color !")
+        }
+        else if (productSize.length===0){
+            errorToast("Enter your product Size !")
         }
         else if (productDiscount.length === 0 || productDiscount < 0 || productDiscount > 100) {
             errorToast("Product Discount must be between 0% and 100%");
@@ -168,6 +196,9 @@
                 brand_id: brandSelect,
                 title: productTitle,
                 short_des: productShortDes,
+                description: productDes,
+                color: productColor,
+                size: productSize,
                 price: productPrice,
                 discount: productDiscount,
                 remark: remarkSelect,

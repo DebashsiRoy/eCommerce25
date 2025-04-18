@@ -14,11 +14,11 @@
                     <div class="card px-5 py-5">
                         <table class="table-secondary flex-auto" id="tableData">
                             <thead class="myTable-bg">
-
                             <tr>
                                 <th class="productSL" scope="col">SL N.</th>
                                 <th class="productTitle" scope="col">Product Title</th>
                                 <th class="productShortDes" scope="col">Short Description</th>
+                                <th class="productShortDes" scope="col">Description</th>
                                 <th class="productPrice" scope="col">price</th>
                                 <th class="productDiscount" scope="col">Discount</th>
                                 <th class="pDiscount" scope="col">discount price</th>
@@ -26,6 +26,8 @@
                                 <th class="productStock" scope="col">Stock</th>
                                 <th class="productStar" scope="col">Star</th>
                                 <th class="productRemark" scope="col">Remark</th>
+                                <th class="productColor" scope="col">Color</th>
+                                <th class="productSize" scope="col">Size</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -40,6 +42,10 @@
    </div>
 </div>
 <script>
+    function truncateText(text, maxLength = 50) {
+        if (!text) return '';
+        return text.length > maxLength ? text.substring(0, maxLength) + ' ...' : text;
+    }
     getList();
     async function getList() {
         showLoader();
@@ -51,11 +57,13 @@
         tableData.DataTable().destroy();
         tableList.empty();
 
+
         res.data.forEach(function (item,index){
             let row=`<tr>
                 <td>${index+1}</td>
                 <td>${item['title']}</td>
-                <td class="productShortDes p-4"><p class="product_des">${item['short_des']}</p></td>
+                <td class="productShortDes p-4"><p class="product_des">${truncateText(item['short_des'], 50)}</p></td>
+                <td class="productShortDes p-4"><p class="product_des">${truncateText(item['description'], 50)}</p></td>
                 <td>${item['price']}</td>
                 <td>${item['discount']}</td>
                 <td>${item['discount_price']}</td>
@@ -63,6 +71,8 @@
                 <td>${item['stock']}</td>
                 <td>${item['star']}</td>
                 <td>${item['remark']}</td>
+                <td>${item['color']}</td>
+                <td>${item['size']}</td>
                 <td>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updatedProduct">Edit</button>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
@@ -104,42 +114,43 @@
     .productSL {
         width: 5%;
     }
-    .productTitle {
-        width: 8%;
-    }
-    .productDiscount {
-        width: 8%;
-    }
-    .productShortDes {
-        width: 25%;
-    }
+    /*.productTitle {*/
+    /*    width: 8%;*/
+    /*}*/
+    /*.productDiscount {*/
+    /*    width: 8%;*/
+    /*}*/
+    /*.productShortDes {*/
+    /*    width: 25%;*/
+    /*}*/
     .productStock {
         width: 6%;
     }
+
     .productPrice {
-        width: 10%;
-    }
-    .pDiscount {
         width: 7%;
     }
+    /*.pDiscount {*/
+    /*    width: 7%;*/
+    /*}*/
     .productStar {
-        width: 85px;
+        width: 5%;
     }
-    .productImg {
-        width: 8%;
-    }
+    /*.productImg {*/
+    /*    width: 8%;*/
+    /*}*/
     .productRemark {
-        width: 8%;
+        width: 7%;
+    }
+    .productSize{
+        width: 5%;
     }
     .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-        max-width: 94%;
+        max-width: 100%;
     }
     .myTable-bg{
         background-color: darkslategray !important;
         color: white;
-    }
-    .align-items-center{
-        width: 100%;
     }
     .category-title-bg{
         width: auto;

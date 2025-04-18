@@ -56,7 +56,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 
     // Product Details
     Route::post('/product-add-details', [ProductController::class, 'addProductDetails'])->name('product.addDetails');
-    Route::post('/product-delete-details', [ProductController::class, 'deleteProductDetails'])->name('product.detailsDetails');
+    Route::post('/product-delete-details', [ProductController::class, 'deleteProductDetails'])->name('product.deleteDetails');
+    Route::post('/product-update-details', [ProductController::class, 'updateProductDetails'])->name('product.updateDetails');
+    Route::get('/productDetails-page',[ProductController::class, 'productDetails'])->name('product.details');
+    Route::get('/productDetails-list',[ProductController::class, 'productDetailsList'])->name('product.details.list');
 
 
 });

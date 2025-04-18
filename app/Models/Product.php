@@ -19,7 +19,10 @@ class Product extends Model
         'remark',
         'category_id',
         'brand_id',
-        'user_id'
+        'user_id',
+        'description',
+        'color',
+        'size'
     ];
 
     public function brand(): BelongsTo
@@ -31,3 +34,28 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
