@@ -22,10 +22,13 @@ return new class extends Migration
             $table->string('stock',100);
             $table->float('star');
             $table->enum('remark',['popular','new','top','special','trending','regular']);
-
-            $table->text('description');
-            $table->string('color',50);
-            $table->string('size',50);
+            $table->longText('description');
+            $table->string('color',200);
+            $table->string('size',200);
+            $table->string('img1',200);
+            $table->string('img2',200);
+            $table->string('img3',200);
+            $table->string('img4',200);
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');

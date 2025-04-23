@@ -48,7 +48,7 @@
 // For refresh the table, at first destroy the table
         productDetailsTableData.DataTable().destroy();
         productDetailsTableList.empty();
-        function truncateText(text, maxLength = 50) {
+        function truncateText(text, maxLength = 70) {
             if (!text) return '';
             return text.length > maxLength ? text.substring(0, maxLength) + ' ...' : text;
         }
@@ -60,7 +60,7 @@
                 <td><img src="${item['img2']}" alt="${item['title']}" width="40" height="35"></td>
                 <td><img src="${item['img3']}" alt="${item['title']}" width="40" height="35"></td>
                 <td><img src="${item['img4']}" alt="${item['title']}" width="40" height="35"></td>
-                <td class="productDetailsMar">${truncateText(item['description'], 50)}</td>
+                <td class="productDetailsMar">${truncateText(item['description'], 70)}</td>
                 <td>${item['color']}</td>
                 <td>${item['size']}</td>
 
@@ -127,8 +127,8 @@
         background-color: darkslategray !important;
         color: white;
     }
-    .align-items-center{
-        width: 100%;
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 100%;
     }
     .category-title-bg{
         width: auto;

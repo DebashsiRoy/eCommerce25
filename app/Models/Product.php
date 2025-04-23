@@ -17,12 +17,16 @@ class Product extends Model
         'stock',
         'star',
         'remark',
+        'img1',
+        'img2',
+        'img3',
+        'img4',
+        'description',
+        'color',
+        'size',
         'category_id',
         'brand_id',
         'user_id',
-        'description',
-        'color',
-        'size'
     ];
 
     public function brand(): BelongsTo

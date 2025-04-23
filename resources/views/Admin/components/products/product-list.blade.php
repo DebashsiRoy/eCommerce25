@@ -18,7 +18,6 @@
                                 <th class="productSL" scope="col">SL N.</th>
                                 <th class="productTitle" scope="col">Product Title</th>
                                 <th class="productShortDes" scope="col">Short Description</th>
-                                <th class="productShortDes" scope="col">Description</th>
                                 <th class="productPrice" scope="col">price</th>
                                 <th class="productDiscount" scope="col">Discount</th>
                                 <th class="pDiscount" scope="col">discount price</th>
@@ -26,8 +25,6 @@
                                 <th class="productStock" scope="col">Stock</th>
                                 <th class="productStar" scope="col">Star</th>
                                 <th class="productRemark" scope="col">Remark</th>
-                                <th class="productColor" scope="col">Color</th>
-                                <th class="productSize" scope="col">Size</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -63,7 +60,6 @@
                 <td>${index+1}</td>
                 <td>${item['title']}</td>
                 <td class="productShortDes p-4"><p class="product_des">${truncateText(item['short_des'], 50)}</p></td>
-                <td class="productShortDes p-4"><p class="product_des">${truncateText(item['description'], 50)}</p></td>
                 <td>${item['price']}</td>
                 <td>${item['discount']}</td>
                 <td>${item['discount_price']}</td>
@@ -71,8 +67,6 @@
                 <td>${item['stock']}</td>
                 <td>${item['star']}</td>
                 <td>${item['remark']}</td>
-                <td>${item['color']}</td>
-                <td>${item['size']}</td>
                 <td>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updatedProduct">Edit</button>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
@@ -80,7 +74,6 @@
             </tr>`
             tableList.append(row)
         });
-
 
 
         $('.editBtn').on('click', async function () {
@@ -96,7 +89,6 @@
             $("#deleteProduct").modal('show');         // Show delete modal
             $("#deleteID").val(id);
             $("#deleteFilePath").val(path);
-
             // get id into the delete modal input field
         })
 
