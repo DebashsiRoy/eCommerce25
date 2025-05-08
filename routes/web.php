@@ -3,9 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\shopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-profile', [UserController::class, 'userProfile'])->name('profile.details');
     Route::get('/user-account-details', [UserController::class, 'accountDetails'])->name('user.account.details');
     Route::post('/user-profile-update', [UserController::class, 'UpdateProfile'])->name('user.profile.update');
-
+    // Customer Profile
+    Route::post('/customer-profile', [CustomerProfileController::class, 'CreateCustomerProfile'])->name('customer.profile');
+    Route::get('/readProfile', [CustomerProfileController::class, 'ReadProfile'])->name('customer.page');
 });
 Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
 //Admin section
@@ -56,13 +60,18 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::post('/product-delete', [ProductController::class, 'deleteProduct'])->name('product.delete');
 
     // Product Details
-    Route::post('/product-add-details', [ProductDetailController::class, 'addProductDetails'])->name('product.addDetails');
-    Route::post('/product-delete-details', [ProductDetailController::class, 'deleteProductDetails'])->name('product.deleteDetails');
-    Route::post('/product-update-details', [ProductDetailController::class, 'updateProductDetails'])->name('product.updateDetails');
-    Route::get('/productDetails-page',[ProductDetailController::class, 'productDetailsPage'])->name('product.details');
-    Route::get('/productDetails-list',[ProductDetailController::class, 'ProductDetailsList'])->name('product.details.list');
+//    Route::post('/product-add-details', [ProductDetailController::class, 'addProductDetails'])->name('product.addDetails');
+//    Route::post('/product-delete-details', [ProductDetailController::class, 'deleteProductDetails'])->name('product.deleteDetails');
+//    Route::post('/product-update-details', [ProductDetailController::class, 'updateProductDetails'])->name('product.updateDetails');
+//    Route::get('/productDetails-page',[ProductDetailController::class, 'productDetailsPage'])->name('product.details');
+//    Route::get('/productDetails-list',[ProductDetailController::class, 'ProductDetailsList'])->name('product.details.list');
+
 
 
 });
+
+Route::get('shop-page', [shopController::class, 'salePage'])->name('shop.page');
+Route::get('shop-products', [shopController::class, 'shopProducts'])->name('shop.products');
+
 
 

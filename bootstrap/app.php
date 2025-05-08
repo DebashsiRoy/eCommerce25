@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/product-add-details',
             'http://127.0.0.1:8000/product-delete-details',
             'http://127.0.0.1:8000/product-update-details',
+            'http://127.0.0.1:8000/customer-profile',
 
         ]);
     })

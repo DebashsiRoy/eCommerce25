@@ -44,12 +44,6 @@
                                 <div class="text">Products</div>
                             </a>
                         </li>
-                        <li class="sub-menu-item">
-                            <a href="{{ route('product.details') }}" class="menu-item-button">
-                                <div class="icon"><i class="icon-shopping-cart"></i></div>
-                                <div class="text">Products Details</div>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 

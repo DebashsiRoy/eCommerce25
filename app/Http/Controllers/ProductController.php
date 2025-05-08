@@ -119,6 +119,26 @@ class ProductController extends Controller
 
             $img->move(public_path('uploads/product/'), $img_name);
 
+            $img1 = $request->file('img1');
+            $img2 = $request->file('img2');
+            $img3 = $request->file('img3');
+            $img4 = $request->file('img4');
+
+            $img1_name = "{$user_id}-{$t}_" . $img1->getClientOriginalName();
+            $img2_name = "{$user_id}-{$t}_" . $img2->getClientOriginalName();
+            $img3_name = "{$user_id}-{$t}_" . $img3->getClientOriginalName();
+            $img4_name = "{$user_id}-{$t}_" . $img4->getClientOriginalName();
+
+            $img1_url = "uploads/productDetails/{$img1_name}";
+            $img2_url = "uploads/productDetails/{$img2_name}";
+            $img3_url = "uploads/productDetails/{$img3_name}";
+            $img4_url = "uploads/productDetails/{$img4_name}";
+
+            $img1->move(public_path('uploads/productDetails/'), $img1_name);
+            $img2->move(public_path('uploads/productDetails/'), $img2_name);
+            $img3->move(public_path('uploads/productDetails/'), $img3_name);
+            $img4->move(public_path('uploads/productDetails/'), $img4_name);
+
             $ProductPrice=$request->input('price');
             $ProductDiscount=$request->input('discount');
 
@@ -147,6 +167,13 @@ class ProductController extends Controller
                 'stock'=>$request->input('stock'),
                 'star'=>$request->input('star'),
                 'remark'=>$request->input('remark'),
+                'img1' => $img1_url,
+                'img2' => $img2_url,
+                'img3' => $img3_url,
+                'img4' => $img4_url,
+                'description' => $request->input('description'),
+                'color' => $request->input('color'),
+                'size' => $request->input('size'),
                 'user_id'=>$user_id,
                 'category_id'=>$request->input('category_id'),
                 'brand_id'=>$request->input('brand_id'),
@@ -188,12 +215,6 @@ class ProductController extends Controller
         File::delete($filePath);
         return Product::where('id',$product_id)->where('user_id',$user_id)->delete();
     }
-
-
-
-
-
-
 
     public function ListProductCategory(Request $request):JsonResponse
     {
