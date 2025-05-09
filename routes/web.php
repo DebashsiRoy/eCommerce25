@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProductReviewController;
+use App\Http\Controllers\ProductWishController;
 use App\Http\Controllers\shopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
@@ -31,6 +32,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Product Review
     Route::post('/product-review', [ProductReviewController::class, 'CreateProductReview'])->name('product.review');
+
+    // Product Wish list
+    Route::get('/product-wishlist', [ProductWishController::class, 'productWishList'])->name('product.wishlist');
+    Route::get('/create-wishlist/{product_id}', [ProductWishController::class, 'CreateWishList'])->name('create.wishlist');
+    Route::get('/remove-wishlist/{product_id}', [ProductWishController::class, 'RemoveWishList'])->name('remove.wishlist');
 });
 Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
 //Admin section
