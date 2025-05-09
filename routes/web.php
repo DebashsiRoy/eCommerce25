@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\shopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
@@ -27,6 +28,9 @@ Route::middleware(['auth'])->group(function () {
     // Customer Profile
     Route::post('/customer-profile', [CustomerProfileController::class, 'CreateCustomerProfile'])->name('customer.profile');
     Route::get('/readProfile', [CustomerProfileController::class, 'ReadProfile'])->name('customer.page');
+
+    // Product Review
+    Route::post('/product-review', [ProductReviewController::class, 'CreateProductReview'])->name('product.review');
 });
 Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
 //Admin section

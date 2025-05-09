@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\View;
 
 class CustomerProfileController extends Controller
 {
+
+
     public function CreateCustomerProfile(Request $request): JsonResponse
     {
         $user_id = Auth::id();
