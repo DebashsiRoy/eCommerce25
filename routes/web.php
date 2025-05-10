@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductCartsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProductReviewController;
@@ -33,10 +34,9 @@ Route::middleware(['auth'])->group(function () {
     // Product Review
     Route::post('/product-review', [ProductReviewController::class, 'CreateProductReview'])->name('product.review');
 
-    // Product Wish list
-    Route::get('/product-wishlist', [ProductWishController::class, 'productWishList'])->name('product.wishlist');
-    Route::get('/create-wishlist/{product_id}', [ProductWishController::class, 'CreateWishList'])->name('create.wishlist');
-    Route::get('/remove-wishlist/{product_id}', [ProductWishController::class, 'RemoveWishList'])->name('remove.wishlist');
+    // Product Cart
+    Route::post('/addTo-cart',[ProductCartsController::class, 'CreateCartList'])->name('addTo.cart');
+
 });
 Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
 //Admin section
@@ -69,19 +69,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::post('/product-by-id', [ProductController::class, 'productById'])->name('product.byID');
     Route::post('/product-delete', [ProductController::class, 'deleteProduct'])->name('product.delete');
 
-    // Product Details
-//    Route::post('/product-add-details', [ProductDetailController::class, 'addProductDetails'])->name('product.addDetails');
-//    Route::post('/product-delete-details', [ProductDetailController::class, 'deleteProductDetails'])->name('product.deleteDetails');
-//    Route::post('/product-update-details', [ProductDetailController::class, 'updateProductDetails'])->name('product.updateDetails');
-//    Route::get('/productDetails-page',[ProductDetailController::class, 'productDetailsPage'])->name('product.details');
-//    Route::get('/productDetails-list',[ProductDetailController::class, 'ProductDetailsList'])->name('product.details.list');
-
-
-
 });
 
 Route::get('shop-page', [shopController::class, 'salePage'])->name('shop.page');
 Route::get('shop-products', [shopController::class, 'shopProducts'])->name('shop.products');
 
-
+// Product Wish list
+Route::get('/product-wishlist', [ProductWishController::class, 'productWishList'])->name('product.wishlist');
+Route::get('/create-wishlist/{product_id}', [ProductWishController::class, 'CreateWishList'])->name('create.wishlist');
+Route::get('/remove-wishlist/{product_id}', [ProductWishController::class, 'RemoveWishList'])->name('remove.wishlist');
 
