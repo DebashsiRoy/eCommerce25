@@ -43,6 +43,20 @@ class ProductCartsController extends Controller
         );
         return ResponseHelper::Out('success', $cart, 200);
     }
+    public function CartList(Request $request): JsonResponse
+    {
+        $user_id = Auth::id();
+        $data = ProductCarts::where('user_id', $user_id)->with('product')->get();
+        return ResponseHelper::Out('success', $data, 200);
+    }
+
+    public function DeleteCartList(Request $request): JsonResponse
+
+    {
+        $user_id = Auth::id();
+        $data = ProductCarts::where('user_id','=', $user_id)->where('product_id', '=', $request->product_id)->delete();
+        return ResponseHelper::Out('success', $data, 200);
+    }
 }
 
 

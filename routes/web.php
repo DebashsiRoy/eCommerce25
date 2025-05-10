@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Product Cart
     Route::post('/addTo-cart',[ProductCartsController::class, 'CreateCartList'])->name('addTo.cart');
+    Route::get('/cart-list',[ProductCartsController::class, 'CartList'])->name('cart.list');
+    Route::get('/delete-cart/{product_id}',[ProductCartsController::class, 'DeleteCartList'])->name('cart.delete');
 
 });
 Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
