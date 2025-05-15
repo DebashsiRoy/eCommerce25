@@ -5,12 +5,14 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductCartsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProductWishController;
 use App\Http\Controllers\shopController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +40,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/addTo-cart',[ProductCartsController::class, 'CreateCartList'])->name('addTo.cart');
     Route::get('/cart-list',[ProductCartsController::class, 'CartList'])->name('cart.list');
     Route::get('/delete-cart/{product_id}',[ProductCartsController::class, 'DeleteCartList'])->name('cart.delete');
+
+    // Invoice
+    Route::get('/create-invoice',[invoiceController::class, 'InvoiceCreate'])->name('create.invoice');
+
+    // Product carts
+    Route::get('/payment',[ProductCartsController::class, 'CreatePayment'])->name('create.payment');
+
+
+    Route::get('/payment/success', [StripePaymentController::class, 'success'])->name('stripe.success');
+    Route::get('/payment/cancel', [StripePaymentController::class, 'cancel'])->name('stripe.cancel');
+
 
 });
 Route::get('/user-dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');

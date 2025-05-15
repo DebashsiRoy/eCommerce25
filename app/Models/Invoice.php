@@ -13,7 +13,7 @@ class Invoice extends Model
         'cus_details',
         'ship_details',
         'tran_details',
-        'validation_id',
+//        'validation_id',
         'delivery_status',
         'payment_status',
         'user_id',
