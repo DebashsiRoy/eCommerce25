@@ -15,6 +15,7 @@ use App\Http\Controllers\shopController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
@@ -22,6 +23,8 @@ Auth::routes();
 
 // User Section
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [UserController::class, 'index'])->name('user.index');
@@ -43,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Invoice
     Route::get('/create-invoice',[invoiceController::class, 'InvoiceCreate'])->name('create.invoice');
+    Route::get('/invoice-list',[invoiceController::class, 'InvoiceList'])->name('invoice-list');
+    Route::get('/invoice-product-list/{invoice_id}',[invoiceController::class, 'InvoiceProductList'])->name('invoice-product-list');
 
     // Product carts
     Route::get('/payment',[ProductCartsController::class, 'CreatePayment'])->name('create.payment');
@@ -94,3 +99,9 @@ Route::get('/product-wishlist', [ProductWishController::class, 'productWishList'
 Route::get('/create-wishlist/{product_id}', [ProductWishController::class, 'CreateWishList'])->name('create.wishlist');
 Route::get('/remove-wishlist/{product_id}', [ProductWishController::class, 'RemoveWishList'])->name('remove.wishlist');
 
+// Get details
+Route::get('/category-list-in-menu', [CategoryController::class, 'categoryForMenu'])->name('category.list.menu');
+Route::get('/brand-list-home', [BrandController::class, 'brandListAll'])->name('brand.list.home');
+
+Route::post("/add-slider", [ProductController::class, 'addSlider'])->name('add.slider');
+Route::get('/ListProductSlider', [ProductController::class, 'ListProductSlider'])->name('product.slider');

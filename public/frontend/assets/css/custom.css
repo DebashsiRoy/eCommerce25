@@ -17,3 +17,11 @@
 .form-floating>.form-select {
     height: 48px;
 }
+
+#dropdownMenuButton2 {
+    margin: 0 auto;
+    padding: 0;
+    font-family: "Rajdhani", "Jost", sans-serif;
+    font-size: .85rem;
+    font-weight: 401;
+}

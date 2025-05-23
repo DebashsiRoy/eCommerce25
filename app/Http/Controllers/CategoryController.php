@@ -7,13 +7,21 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Image;
 use Mockery\Exception;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class CategoryController extends Controller
 {
     public function CategoryPage()
     {
         return view('Admin.pages.category-page');
+    }
+
+    public function categoryForMenu()
+    {
+        return Category::all();
     }
 
     public function CategoryList(Request $request)
@@ -34,6 +42,8 @@ class CategoryController extends Controller
 
         // Upload File
         $img->move(public_path('uploads/category/'), $img_name);
+        // Resize Image
+
 
 
         return Category::create([

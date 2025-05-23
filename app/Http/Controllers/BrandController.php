@@ -20,6 +20,10 @@ class BrandController extends Controller
     {
         return view('Admin.pages.brand');
     }
+    public function brandListAll()
+    {
+        return Brand::all();
+    }
    public function BrandList()
    {
         $user_id = Auth::id();

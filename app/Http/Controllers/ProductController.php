@@ -236,6 +236,34 @@ class ProductController extends Controller
         $data=ProductSlider::all();
         return ResponseHelper::Out('success', $data, 200);
     }
+
+
+    public function addSlider(Request $request): JsonResponse
+    {
+        // Validate product ID
+        $request->validate([
+            'product_id' => 'required|exists:products,id'
+        ]);
+
+        // Fetch the product
+        $product = Product::find($request->product_id);
+
+        // Create a new slider entry using product data
+        $slider = ProductSlider::create([
+            'product_id' => $product->id,
+            'title' => $product->title,
+            'short_des' => $product->short_des,
+            'price' => $product->price,
+            'image' => $product->image,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $slider,
+        ], 201);
+    }
+
+
     public function ProductDetailById(Request $request):JsonResponse
     {
         $data=ProductDetail::where('product_id', $request->id)->with('product','product.brand','product.category')->get();

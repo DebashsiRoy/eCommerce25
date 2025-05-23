@@ -12,11 +12,11 @@ class StripePaymentController extends Controller
         $invoiceId = $request->query('invoice_id');
         $invoice = Invoice::find($invoiceId);
         if ($invoice) {
-            $invoice->payment_status = 'Paid';
+            $invoice->payment_status = 'Success';
             $invoice->save();
         }
 
-        return view('payment.success', compact('invoice'));
+        return 1;
     }
 
     public function cancel(Request $request)
@@ -28,7 +28,7 @@ class StripePaymentController extends Controller
             $invoice->save();
         }
 
-        return view('payment.cancel', compact('invoice'));
+        return 1;
     }
 
 }

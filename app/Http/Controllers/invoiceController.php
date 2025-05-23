@@ -107,7 +107,7 @@ class invoiceController extends Controller
             Stripe::setApiKey(config('services.stripe.secret'));
 
             $session = StripeSession::create([
-                'payment_method_types' => ['card'],
+                'payment_method_types' => ['card', 'amazon_pay', 'cashapp', 'afterpay_clearpay', 'affirm'],
                 'line_items' => $lineItems,
                 'mode' => 'payment',
                 'success_url' => route('stripe.success', ['invoice_id' => $invoice->id]),
@@ -134,4 +134,34 @@ class invoiceController extends Controller
             return ResponseHelper::Out('fail', $e->getMessage(), 500);
         }
     }
+
+    function InvoiceList(Request $request)
+    {
+        $user_id = Auth::id();
+        return Invoice::where('user_id','=', $user_id)->get();
+    }
+
+    function InvoiceProductList(Request $request)
+    {
+        $user_id = Auth::id();
+        $invoice_id=$request->invoice_id;
+        return InvoiceProduct::where(['user_id' => $user_id, 'invoice_id' => $invoice_id])->with('product')->get();
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
