@@ -1,56 +1,65 @@
-<section class="category-carousel container position-top">
-    <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">Top Brand</h2>
+<div class="section small_pt pb_70">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="heading_s1 text-center">
+                    <h2>Top Brand</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex" id="homeBrandList">
 
-    <div class="position-relative" id="topBrandList">
+            </div>
+        </div>
+    </div>
+</div>
 
-    </div><!-- /.position-relative -->
-</section>
+
+
 <script>
-    topBrand();
+    // Define the function
+    async function TopBrandList() {
+        try {
+            let res = await axios.get("/brand-list-home");
+            $("#homeBrandList").empty();
 
-    async function topBrand() {
-        let res = await axios.get("/brand-list-home");
-        $("#topBrandList").empty();
-
-        res.data.forEach(function (item,i) {
-            let row = `
-                    <div class="card d-f" style="width: 18rem;">
-                        <img src="${item['brandImg']}" class="card-img-top" alt="${item['categoryName']}">
-                        <div class="card-body">
-                            <h5 class="card-title">${item['brandName']}</h5>
-
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+            res.data.forEach(function (brandItem, i) {
+                let rowData = `
+                    <div class="p-2 col-2">
+                        <div class="product">
+                            <div class="product_img">
+                                <a href="shop-product-detail.html">
+                                    <img src="${brandItem['brandImg']}" alt="${brandItem['brandName']}">
+                                </a>
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_title"><a href="shop-product-detail.html">${brandItem['brandName']}</a></h6>
+                            </div>
                         </div>
                     </div>
                 `;
-            $("#topBrandList").append(row);
-        });
+                $("#homeBrandList").append(rowData);
+            });
+        } catch (error) {
+            console.error("TopCategoryList error:", error);
+        }
     }
+
+    // Call the function
+    // TopBrandList();
 </script>
+
 <style>
-    .category-carousel.container.position-top {
-        margin-top: 50px;
-    }
-    .section-title.text-center.top-position {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        top: -42px;
-        font-size: 2rem;
-    }
-    #topBrandList {
-        display: flex;
-    }
-    .card.d-f {
-        margin: 5px;
-    }
-    .card-img-top {
-        width: auto;
-        height: 250px;
-    }
-    img.card-img-top {
-        width: auto;
-        height: 200px;
+    .product_img {
+        width: 100px;
+        height: 100px;
         margin: 0 auto;
+        padding-top: 5px;
+    }
+    .topCat {
+        flex: 0 0 auto;
+        width: 12% !important;
+        margin: 15px;
     }
 </style>

@@ -105,3 +105,6 @@ Route::get('/brand-list-home', [BrandController::class, 'brandListAll'])->name('
 
 Route::post("/add-slider", [ProductController::class, 'addSlider'])->name('add.slider');
 Route::get('/ListProductSlider', [ProductController::class, 'ListProductSlider'])->name('product.slider');
+
+Route::get("/ListProductByRemark/{remark}", [ProductController::class, 'listProductByRemark'])->name('product.by.remark');
+

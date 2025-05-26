@@ -1,52 +1,49 @@
-<section class="swiper-container js-swiper-slider swiper-number-pagination slideshow" data-settings='{
-        "autoplay": {
-          "delay": 5000
-        },
-        "slidesPerView": 1,
-        "effect": "fade",
-        "loop": true
-      }'>
-    <div class="swiper-wrapper" id="productcSlider">
+<div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
+    <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-bs-ride="carousel">
+        <div class="carousel-inner" id="productSlider">
 
-    </div>
-
-    <div class="container">
-        <div
-            class="slideshow-pagination slideshow-number-pagination d-flex align-items-center position-absolute bottom-0 mb-5">
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev"><i class="ion-chevron-left"></i></a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next"><i class="ion-chevron-right"></i></a>
     </div>
-</section>
+</div>
 <script>
-    getSliderList();
-    async function getSliderList(){
-        let res = await axios.get("/ListProductSlider");
-        $("#productcSlider").empty();
+    async function getSliderList() {
+        try {
+            let res = await axios.get("/ListProductSlider");
 
-        res.data['data'].forEach(function (sliderItem, i){
-            let sliderRow =`<div class="swiper-slide">
-            <div class="overflow-hidden position-relative h-100">
-                <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                    <img loading="lazy" src="${sliderItem['image']}" width="542" height="733"
-                         alt="Woman Fashion 1"
-                         class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
-                    <div class="character_markup type2">
-                        <p
-                            class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0">
-                            ${sliderItem['title']}</p>
+            $("#productSlider").empty();
+
+            res.data['data'].forEach(function (sliderItem, i) {
+                let activeClass = '';
+                if (i === 0) {
+                    activeClass = 'active';
+                }
+
+                let sliderRow = `
+                    <div class="carousel-item ${activeClass} background_bg" data-img-src="" style="background-image: url('${sliderItem['image']}')">
+                        <div class="banner_slide_content">
+                            <div class="container"><!-- START CONTAINER -->
+                                <div class="row">
+                                    <div class="col-lg-7 col-9">
+                                        <div class="banner_content overflow-hidden">
+                                            <h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">${sliderItem['title']}</h5>
+                                            <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">$.${sliderItem['price']}</h2>
+                                            <a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- END CONTAINER -->
+                        </div>
                     </div>
-                </div>
-                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                        New Arrivals</h6>
-                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">${sliderItem['title']}</h2>
-                    <a href="#"
-                       class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                        Now</a>
-                </div>
-            </div>
-        </div>`;
-            $("#productcSlider").append(sliderRow)
-        });
-
+                `;
+                $("#productSlider").append(sliderRow);
+            });
+        } catch (error) {
+            console.error("Failed to load slider items:", error);
+        }
     }
 </script>
+
+
+
