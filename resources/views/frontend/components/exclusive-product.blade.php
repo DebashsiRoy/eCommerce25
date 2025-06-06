@@ -79,7 +79,7 @@
                                         </a>
                                         <div class="product_action_box">
                                             <ul class="list_none pr_action_btn">
-                                                <li><a href="/details?id=${item['id']}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                <li><a href="/details?id=${item['id']}" class="popup-ajax productPopuper"><i class="icon-magnifier-add"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>

@@ -35,73 +35,65 @@ class ProductController extends Controller
         return Product::where('user_id',$user_id)->where('id',$product_id)->first();
     }
     // Add Method for create products
-    function createProduct(Request $request)
+    public function createProduct(Request $request): JsonResponse
     {
-        $user_id = Auth::id();
-
-        // Prepaid file Name & Path
-        $img=$request->file('image');
-        // Pic-up current time
-        $t=time();
-        $file_name= $img->getClientOriginalName();
-        $img_name="{$user_id}-{$t}_{$file_name}";
-        $img_url="uploads/product/{$img_name}";
-
-        $img->move(public_path('uploads/product/'), $img_name);
-
-        $img1 = $request->file('img1');
-        $img2 = $request->file('img2');
-        $img3 = $request->file('img3');
-        $img4 = $request->file('img4');
-
-        $img1_name = "{$user_id}-{$t}_" . $img1->getClientOriginalName();
-        $img2_name = "{$user_id}-{$t}_" . $img2->getClientOriginalName();
-        $img3_name = "{$user_id}-{$t}_" . $img3->getClientOriginalName();
-        $img4_name = "{$user_id}-{$t}_" . $img4->getClientOriginalName();
-
-        $img1_url = "uploads/productDetails/{$img1_name}";
-        $img2_url = "uploads/productDetails/{$img2_name}";
-        $img3_url = "uploads/productDetails/{$img3_name}";
-        $img4_url = "uploads/productDetails/{$img4_name}";
-
-        $img1->move(public_path('uploads/productDetails/'), $img1_name);
-        $img2->move(public_path('uploads/productDetails/'), $img2_name);
-        $img3->move(public_path('uploads/productDetails/'), $img3_name);
-        $img4->move(public_path('uploads/productDetails/'), $img4_name);
-
-        $ProductPrice=$request->input('price');
-        $ProductDiscount=$request->input('discount');
-
-        $ProductPrice = floatval($ProductPrice);
-        $ProductDiscount = floatval($ProductDiscount);
-
-        $discountPrice= $ProductPrice-($ProductPrice*($ProductDiscount/100));
-        $discountPrice = round($discountPrice, 2);
-
-
-        return Product::create([
-            'title'=>$request->input('title'),
-            'short_des'=>$request->input('short_des'),
-            'price'=>$request->input('price'),
-            'discount'=>$request->input('discount'),
-            'discount_price'=> $discountPrice,
-            'image' => $img_url,
-            'stock'=>$request->input('stock'),
-            'star'=>$request->input('star'),
-            'remark'=>$request->input('remark'),
-            'img1' => $img1_url,
-            'img2' => $img2_url,
-            'img3' => $img3_url,
-            'img4' => $img4_url,
-            'description' => $request->input('description'),
-            'color' => $request->input('color'),
-            'size' => $request->input('size'),
-            'user_id'=>$user_id,
-            'category_id'=>$request->input('category_id'),
-            'brand_id'=>$request->input('brand_id'),
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'short_des' => 'required|string',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric|min:0|max:100',
+            'stock' => 'required|integer',
+            'star' => 'required|numeric|min:1|max:5',
+            'remark' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'brand_id' => 'required|exists:brands,id',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
+        try {
+            $user_id = Auth::id();
+
+            $img = $request->file('image');
+            $t = time();
+            $file_name = $img->getClientOriginalName();
+            $img_name = "{$user_id}-{$t}_{$file_name}";
+            $img_url = "uploads/product/{$img_name}";
+
+            // Save image after validation
+            $img->move(public_path('uploads/product/'), $img_name);
+
+            $price = floatval($request->input('price'));
+            $discount = floatval($request->input('discount'));
+            $discountPrice = round($price - ($price * ($discount / 100)), 2);
+
+            $product = Product::create([
+                'title' => $request->input('title'),
+                'short_des' => $request->input('short_des'),
+                'price' => $price,
+                'discount' => $discount,
+                'discount_price' => $discountPrice,
+                'image' => $img_url,
+                'stock' => $request->input('stock'),
+                'star' => $request->input('star'),
+                'remark' => $request->input('remark'),
+                'user_id' => $user_id,
+                'category_id' => $request->input('category_id'),
+                'brand_id' => $request->input('brand_id'),
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Product created successfully',
+                'data' => $product
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
+
 
     function updateProduct(Request $request)
     {
@@ -119,25 +111,7 @@ class ProductController extends Controller
 
             $img->move(public_path('uploads/product/'), $img_name);
 
-            $img1 = $request->file('img1');
-            $img2 = $request->file('img2');
-            $img3 = $request->file('img3');
-            $img4 = $request->file('img4');
 
-            $img1_name = "{$user_id}-{$t}_" . $img1->getClientOriginalName();
-            $img2_name = "{$user_id}-{$t}_" . $img2->getClientOriginalName();
-            $img3_name = "{$user_id}-{$t}_" . $img3->getClientOriginalName();
-            $img4_name = "{$user_id}-{$t}_" . $img4->getClientOriginalName();
-
-            $img1_url = "uploads/productDetails/{$img1_name}";
-            $img2_url = "uploads/productDetails/{$img2_name}";
-            $img3_url = "uploads/productDetails/{$img3_name}";
-            $img4_url = "uploads/productDetails/{$img4_name}";
-
-            $img1->move(public_path('uploads/productDetails/'), $img1_name);
-            $img2->move(public_path('uploads/productDetails/'), $img2_name);
-            $img3->move(public_path('uploads/productDetails/'), $img3_name);
-            $img4->move(public_path('uploads/productDetails/'), $img4_name);
 
             $ProductPrice=$request->input('price');
             $ProductDiscount=$request->input('discount');
@@ -167,13 +141,6 @@ class ProductController extends Controller
                 'stock'=>$request->input('stock'),
                 'star'=>$request->input('star'),
                 'remark'=>$request->input('remark'),
-                'img1' => $img1_url,
-                'img2' => $img2_url,
-                'img3' => $img3_url,
-                'img4' => $img4_url,
-                'description' => $request->input('description'),
-                'color' => $request->input('color'),
-                'size' => $request->input('size'),
                 'user_id'=>$user_id,
                 'category_id'=>$request->input('category_id'),
                 'brand_id'=>$request->input('brand_id'),
@@ -268,6 +235,21 @@ class ProductController extends Controller
         ], 201);
     }
 
+    public function addProductDetails(Request $request): JsonResponse
+    {
+        $product_id = $request->id;
+        $data = ProductDetail::create([
+            'product_id' => $product_id,
+            'img1' => $request->input('img1'),
+            'img2' => $request->input('img2'),
+            'img3' => $request->input('img3'),
+            'img4' => $request->input('img4'),
+            'description' => $request->input('description'),
+            'color' => $request->input('color'),
+            'size' => $request->input('size'),
+        ]);
+        return ResponseHelper::Out('success', $data, 200);
+    }
 
     public function ProductDetailById(Request $request):JsonResponse
     {

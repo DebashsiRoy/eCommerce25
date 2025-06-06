@@ -1,55 +1,66 @@
-@extends('layouts.app')
+@include('frontend.components.head')
+    <!-- START LOGIN SECTION -->
+    <div class="login_register_wrap section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-md-10">
+                    <div class="login_wrap">
+                        <div class="padding_eight_all bg-white">
+                            <div class="heading_s1">
+                                <h3>Login</h3>
+                            </div>
 
-@section('content')
-    <main class="pt-90">
-        <div class="mb-4 pb-4"></div>
-        <section class="login-register container">
-            <ul class="nav nav-tabs mb-5" id="login_register" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link nav-link_underscore active" id="login-tab" data-bs-toggle="tab" href="#tab-item-login"
-                       role="tab" aria-controls="tab-item-login" aria-selected="true">Login</a>
-                </li>
-            </ul>
-            <div class="tab-content pt-2" id="login_register_tab_content">
-                <div class="tab-pane fade show active" id="tab-item-login" role="tabpanel" aria-labelledby="login-tab">
-                    <div class="login-form">
-
-                        <form method="POST" action="{{ route('login') }}" name="login-form" class="needs-validation" novalidate="">
-                            @csrf
-                            <div class="form-floating mb-3">
-                                <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required="" autocomplete="email"
-                                       autofocus="">
-                                <label for="email">Email address *</label>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
+                            <form method="post"  action="{{ route('login') }}">
+                                @csrf
+                                <div class="form-group mb-3">
+                                    <input type="text" required="" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Your Email"  value="{{ old('email') }}" autocomplete="email">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
-
-                            <div class="pb-3"></div>
-
-                            <div class="form-floating mb-3">
-                                <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
-                                       autocomplete="current-password">
-                                <label for="customerPasswodInput">Password *</label>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input class="form-control @error('password') is-invalid @enderror" required="" type="password" name="password" placeholder="Password">
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
+                                    @enderror
+                                </div>
+                                <div class="login_footer form-group mb-3">
+{{--                                    <div class="chek-form">--}}
+{{--                                        <div class="custome-checkbox">--}}
+{{--                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">--}}
+{{--                                            <label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                    <a href="#">Forgot password?</a>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <button type="submit" class="btn btn-fill-out btn-block" name="login">Log in</button>
+                                </div>
+                            </form>
 
-                            <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
 
-                            <div class="customer-option mt-4 text-center">
-                                <span class="text-secondary">No account yet?</span>
-                                <a href="{{ route('register') }}" class="btn-text js-show-register">Create Account</a>
+                            <div class="different_login">
+                                <span> or</span>
                             </div>
-                        </form>
+                            <ul class="btn-login list_none text-center">
+                                <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
+                                <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                            </ul>
+                            <div class="form-note text-center">Don't Have an Account? <a href="{{ route('register') }}">Sign up now</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-@endsection
+        </div>
+    </div>
+    <!-- END LOGIN SECTION -->
+@include('frontend.components.script')
+    <script>
+        (async () =>{
+            $(".preloader").delay(50).fadeOut(100).addClass('loaded')
+        })()
+    </script>

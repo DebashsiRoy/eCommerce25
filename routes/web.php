@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProductCartsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
@@ -64,6 +65,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     // products section
     Route::get('/products-page', [ProductController::class, 'index'])->name('product.index');
+    Route::post("/add-product-details", [ProductController::class, 'addProductDetails'])->name('product.details.create');
 
     // Category section
     Route::get('/category-page', [CategoryController::class, 'CategoryPage'])->name('category.index');
@@ -89,6 +91,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::post('/product-by-id', [ProductController::class, 'productById'])->name('product.byID');
     Route::post('/product-delete', [ProductController::class, 'deleteProduct'])->name('product.delete');
 
+    // Policy Controller
+    Route::post('/add-policy', [PolicyController::class, 'policyAdd'])->name('add-policy');
+
+
 });
 
 Route::get('shop-page', [shopController::class, 'salePage'])->name('shop.page');
@@ -108,3 +114,17 @@ Route::get('/ListProductSlider', [ProductController::class, 'ListProductSlider']
 
 Route::get("/ListProductByRemark/{remark}", [ProductController::class, 'listProductByRemark'])->name('product.by.remark');
 
+Route::get("/brCategoryPage", [CategoryController::class, 'ByCategoryPage'])->name('category.page');
+Route::get("/byCategoryListById/{id}", [ProductController::class, 'ListProductCategory'])->name('category.list.by.id');
+
+Route::get("/list-by-brand",[BrandController::class,'byBrandPage'])->name('brand.page');
+Route::get("/byBrandListById/{id}", [ProductController::class, 'ListProductBrand'])->name('brand.list.by.id');
+
+Route::get('/policy-list/{type}', [PolicyController::class, 'PolicyByType'])->name('policy-list');
+Route::get("/policy",[PolicyController::class, 'policyPage'])->name('policy');
+
+Route::get("/product-details",[HomeController::class, 'productDetails'])->name('product.details');
+Route::get("/details-by-id/{id}", [ProductController::class, 'ProductDetailById'])->name('details.by.id');
+
+// user login and register page
+Route::get("/user-login", [HomeController::class, 'loginPage'])->name('login-page');

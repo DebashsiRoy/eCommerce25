@@ -19,6 +19,10 @@ class CategoryController extends Controller
         return view('Admin.pages.category-page');
     }
 
+    public function ByCategoryPage()
+    {
+        return view('frontend.pages.product-by-category');
+    }
     public function categoryForMenu()
     {
         return Category::all();

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['about', 'refund','terms','how to buy','contact','complain']);
             $table->longText('des');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

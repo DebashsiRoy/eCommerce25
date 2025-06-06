@@ -21,30 +21,31 @@
     // TopCategoryList();
     // Define the function
     async function TopCategoryList() {
-        try {
             let res = await axios.get("/category-list-in-menu");
             $("#homeCategoryList").empty();
 
-            res.data.forEach(function (HCategoryItem, i) {
+            res.data.forEach(function (item, i) {
                 let rowData = `
                     <div class="p-2 col-2">
                         <div class="product">
+                            <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li><a href="/brCategoryPage?id=${item['id']}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                    </ul>
+                            </div>
                             <div class="product_img">
-                                <a href="shop-product-detail.html">
-                                    <img src="${HCategoryItem['categoryImg']}" alt="${HCategoryItem['categoryName']}">
+                                <a href="/brCategoryPage?id=${item['id']}">
+                                    <img src="${item['categoryImg']}" alt="${item['categoryName']}">
                                 </a>
                             </div>
                             <div class="product_info">
-                                <h6 class="product_title"><a href="shop-product-detail.html">${HCategoryItem['categoryName']}</a></h6>
+                                <h6 class="product_title"><a href="/brCategoryPage?id=${item['id']}">${item['categoryName']}</a></h6>
                             </div>
                         </div>
                     </div>
                 `;
                 $("#homeCategoryList").append(rowData);
             });
-        } catch (error) {
-            console.error("TopCategoryList error:", error);
-        }
     }
 
 </script>

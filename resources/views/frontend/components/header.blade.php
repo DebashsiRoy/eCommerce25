@@ -6,9 +6,9 @@
                     <div class="d-flex align-items-center justify-content-center justify-content-md-start">
                         <div class="lng_dropdown me-2">
                             <select name="countries" class="custome_select">
-                                <option value='en' data-image="assets/images/eng.png" data-title="English">English</option>
-                                <option value='fn' data-image="assets/images/fn.png" data-title="France">France</option>
-                                <option value='us' data-image="assets/images/us.png" data-title="United States">United States</option>
+                                <option value='en' data-image="{{ asset('frontend/assets/images/eng.png') }}" data-title="English">English</option>
+                                <option value='fn' data-image="{{ asset('frontend/assets/images/fn.png') }}" data-title="France">France</option>
+                                <option value='us' data-image="{{ asset('frontend/assets/images/us.png') }}" data-title="United States">United States</option>
                             </select>
                         </div>
                         <div class="me-3">
@@ -26,19 +26,27 @@
                 <div class="col-md-6">
                     <div class="text-center text-md-end">
                         <ul class="header_list">
-                            <li><a href="compare.html"><i class="ti-control-shuffle"></i><span>Compare</span></a></li>
+                            <li><a href="/policy?type=about"><span>About us</span></a></li>
                             <li><a href="wishlist.html"><i class="ti-heart"></i><span>Wishlist</span></a></li>
-                            <li><a href="login.html"><i class="ti-user"></i><span>Login</span></a></li>
+
+                            @guest
+                                <li><a href="{{ route('login') }}"><i class="ti-user"></i><span>Login</span></a></li>
+                            @else
+                                <li><a href="{{ Auth::user()->usertype==='admin' ? route('admin.index'): route('home.index') }}"><i class="ti-user"></i><span><span class="">{{ Auth::user()->name }}</span></span></a></li>
+
+                            @endguest
+
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="bottom_header dark_skin main_menu_uppercase">
         <div class="container">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{ url("/") }}">
                     <img class="logo_light" src="assets/images/logo_light.png" alt="logo" />
                     <img class="logo_dark" src="assets/images/logo_dark.png" alt="logo" />
                 </a>
@@ -48,31 +56,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="dropdown">
-                            <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle active" href="#">Home</a>
-                            <div class="dropdown-menu">
-                                <ul>
-                                    <li><a class="dropdown-item nav-link nav_item active" href="index.html">Fashion 1</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="index-2.html">Fashion 2</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="index-3.html">Furniture 1</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="index-4.html">Furniture 2</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="index-5.html">Electronics 1</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="index-6.html">Electronics 2</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu">
-                                <ul>
-                                    <li><a class="dropdown-item nav-link nav_item" href="about.html">About Us</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="contact.html">Contact Us</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="faq.html">Faq</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="404.html">404 Error Page</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="login.html">Login</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="signup.html">Register</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="term-condition.html">Terms and Conditions</a></li>
-                                </ul>
-                            </div>
+                            <a class="nav-link nav_item active" href="{{ url("/") }}">Home</a>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Products</a>
@@ -80,85 +64,7 @@
 
                             </div>
                         </li>
-                        <li class="dropdown dropdown-mega-menu">
-                            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Products</a>
-                            <div class="dropdown-menu">
-                                <ul class="mega-menu d-lg-flex">
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">Woman's</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Vestibulum sed</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-left-sidebar.html">Donec porttitor</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-right-sidebar.html">Donec vitae facilisis</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-list.html">Curabitur tempus</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-load-more.html">Vivamus in tortor</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">Men's</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-cart.html">Donec vitae ante ante</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="checkout.html">Etiam ac rutrum</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="wishlist.html">Quisque condimentum</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="compare.html">Curabitur laoreet</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="order-completed.html">Vivamus in tortor</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">Kid's</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail.html">Donec vitae facilisis</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-left-sidebar.html">Quisque condimentum</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-right-sidebar.html">Etiam ac rutrum</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec vitae ante ante</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec porttitor</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">Accessories</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail.html">Donec vitae facilisis</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-left-sidebar.html">Quisque condimentum</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-right-sidebar.html">Etiam ac rutrum</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec vitae ante ante</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec porttitor</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <div class="d-lg-flex menu_banners row g-3 px-3">
-                                    <div class="col-sm-4">
-                                        <div class="header-banner">
-                                            <img src="assets/images/menu_banner1.jpg" alt="menu_banner1">
-                                            <div class="banne_info">
-                                                <h6>10% Off</h6>
-                                                <h4>New Arrival</h4>
-                                                <a href="#">Shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="header-banner">
-                                            <img src="assets/images/menu_banner2.jpg" alt="menu_banner2">
-                                            <div class="banne_info">
-                                                <h6>15% Off</h6>
-                                                <h4>Men's Fashion</h4>
-                                                <a href="#">Shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="header-banner">
-                                            <img src="assets/images/menu_banner3.jpg" alt="menu_banner3">
-                                            <div class="banne_info">
-                                                <h6>23% Off</h6>
-                                                <h4>Kids Fashion</h4>
-                                                <a href="#">Shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+
                         <li class="dropdown">
                             <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Blog</a>
                             <div class="dropdown-menu dropdown-reverse">
@@ -316,11 +222,10 @@
             res.data.forEach(function (item, i) {
                 let row = `
                     <ul>
-                        <li><a class="dropdown-item nav-link nav_item" href="#">${item['categoryName']}</a></li>
+                        <li><a class="dropdown-item nav-link nav_item" href="/brCategoryPage?id=${item['id']}">${item['categoryName']}</a></li>
                     </ul>
                 `;
                 $("#categoryDrop").append(row);
             });
     }
 </script>
-

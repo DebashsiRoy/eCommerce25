@@ -22,21 +22,14 @@ return new class extends Migration
             $table->string('stock',100);
             $table->float('star');
             $table->enum('remark',['popular','new','top','special','trending','regular']);
-            $table->longText('description');
-            $table->string('color',200);
-            $table->string('size',200);
-            $table->string('img1',200);
-            $table->string('img2',200);
-            $table->string('img3',200);
-            $table->string('img4',200);
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
 
             $table->foreign('user_id')->references('id')->on('users')
-                ->cascadeOnUpdate()
-                ->restrictOnDelete();
+                ->restrictOnDelete()
+                ->cascadeOnUpdate();
             $table->foreign('category_id')->references('id')->on('categories')
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();

@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Policy extends Model
 {
-    protected $fillable =[
-        'type',
-        'des',
-    ];
+    protected $fillable = ['type', 'des'];
+
 }

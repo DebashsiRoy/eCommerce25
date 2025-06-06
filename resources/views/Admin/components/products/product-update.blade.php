@@ -83,45 +83,6 @@
                                 <input type="text" class="d-none" id="updateID">
                                 <input type="text" class="d-none" id="filePath">
                             </div>
-                            <h4>Product Details Section</h4>
-                            <div class="row mb-3">
-                                <div class="col-md-3">
-                                    <img class="w-15 detailsImg" id="updatedNewDetailsImg1" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 1</label>
-                                    <input oninput="updatedNewDetailsImg1.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="updatedDetailsImg1" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <img class="w-15 detailsImg" id="updatedNewDetailsImg2" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 2</label>
-                                    <input oninput="updatedNewDetailsImg2.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="updatedDetailsImg2" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <img class="w-15 detailsImg" id="updatedNewDetailsImg3" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 3</label>
-                                    <input oninput="updatedNewDetailsImg3.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="updatedDetailsImg3" required>
-                                </div>
-                                <div class="col-md-3">
-                                    <img class="w-15 detailsImg" id="updatedNewDetailsImg4" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 4</label>
-                                    <input oninput="updatedNewDetailsImg4.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="updatedDetailsImg4" required>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Description</label>
-                                <textarea id="detailsDescription" class="form-control addCatName border border-info" rows="3" required></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label>Color</label>
-                                    <input type="text" id="detailsColor" class="form-control addCatName border border-info" required>
-                                </div>
-                                <div class="col">
-                                    <label>Size</label>
-                                    <input type="text" id="detailsSize" class="form-control addCatName border border-info" required>
-                                </div>
-                            </div>
 
                         </div>
                     </div>

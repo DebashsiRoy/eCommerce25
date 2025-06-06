@@ -53,6 +53,7 @@
             await headerName();
             await  getSliderList();
             await   TopCategoryList();
+            $(".preloader").delay(50).fadeOut(100).addClass('loaded')
             await   Popular();
             await   New();
             await   Top();

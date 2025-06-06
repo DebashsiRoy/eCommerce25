@@ -6,6 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body px-5">
+                {{--       form start         --}}
                 <form id="save-form">
                     <div class="container">
                         <div class="row">
@@ -81,45 +82,6 @@
                                 <input oninput="newImg.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="productImg">
 
                             </div>
-                            <h4>Product Details Section</h4>
-                            <div class="row mb-3">
-                                <div class="col-md-3">
-                                     <img class="w-15 detailsImg" id="newDetailsImg1" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 1</label>
-                                    <input oninput="newDetailsImg1.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="detailsImg1" required>
-                                </div>
-                                <div class="col-md-3">
-                                     <img class="w-15 detailsImg" id="newDetailsImg2" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 2</label>
-                                    <input oninput="newDetailsImg2.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="detailsImg2" required>
-                                </div>
-                                <div class="col-md-3">
-                                     <img class="w-15 detailsImg" id="newDetailsImg3" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 3</label>
-                                    <input oninput="newDetailsImg3.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="detailsImg3" required>
-                                </div>
-                                <div class="col-md-3">
-                                     <img class="w-15 detailsImg" id="newDetailsImg4" src="{{asset('admin/images/default.jpg')}}"/>
-                                    <label>Image 4</label>
-                                    <input oninput="newDetailsImg4.src=window.URL.createObjectURL(this.files[0])" type="file" class="form-control addCatName border border-info" id="detailsImg4" required>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Description</label>
-                                <textarea id="detailsDescription" class="form-control addCatName border border-info" rows="3" required></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label>Color</label>
-                                    <input type="text" id="detailsColor" class="form-control addCatName border border-info" required>
-                                </div>
-                                <div class="col">
-                                    <label>Size</label>
-                                    <input type="text" id="detailsSize" class="form-control addCatName border border-info" required>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -167,13 +129,6 @@
         let productStock =document.getElementById('productStock').value;
         let productStar =document.getElementById('productStar').value;
         let productImg = document.getElementById('productImg').files[0];
-        let detailsImg1 = document.getElementById('detailsImg1').files[0];
-        let detailsImg2 = document.getElementById('detailsImg2').files[0];
-        let detailsImg3 = document.getElementById('detailsImg3').files[0];
-        let detailsImg4 = document.getElementById('detailsImg4').files[0];
-        let detailsDescription =document.getElementById('detailsDescription').value;
-        let detailsColor =document.getElementById('detailsColor').value;
-        let detailsSize =document.getElementById('detailsSize').value;
 
         if (categorySelect.length===0){
             errorToast("Category Name Required !")
@@ -206,29 +161,9 @@
         else if (productStar.length===0){
             errorToast("Product Star is required !")
         }
-        else if (detailsDescription.length===0){
-            errorToast("Product Description is required !")
-        }
-        else if (detailsColor.length===0){
-            errorToast("Product Color is required !")
-        }
-        else if (detailsSize.length===0){
-            errorToast("Product Size is required !")
-        }
+
         else if (!productImg){
             errorToast("Product Image is required !")
-        }
-        else if (!detailsImg1){
-            errorToast("Product Image one is required !")
-        }
-        else if (!detailsImg2){
-            errorToast("Product Image two is required !")
-        }
-        else if (!detailsImg3){
-            errorToast("Product Image three is required !")
-        }
-        else if (!detailsImg4){
-            errorToast("Product Image four is required !")
         }
 
         else {
@@ -244,13 +179,6 @@
             formData.append('stock', productStock);
             formData.append('star', productStar);
             formData.append('image', productImg);
-            formData.append('img1', detailsImg1);
-            formData.append('img2', detailsImg2);
-            formData.append('img3', detailsImg3);
-            formData.append('img4', detailsImg4);
-            formData.append('description', detailsDescription);
-            formData.append('color', detailsColor);
-            formData.append('size', detailsSize);
 
             showLoader();
             let res= await axios.post("/product-create", formData,{
@@ -258,6 +186,8 @@
                     'content-type':'multipart/form-data'
                 }
             })
+            console.log(res); // 👈 ADD THIS
+
             hideLoader();
 
             if (res.status===201){

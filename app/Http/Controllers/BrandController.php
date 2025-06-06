@@ -20,6 +20,10 @@ class BrandController extends Controller
     {
         return view('Admin.pages.brand');
     }
+    public function byBrandPage()
+    {
+        return view('frontend.pages.product-by-brand');
+    }
     public function brandListAll()
     {
         return Brand::all();
