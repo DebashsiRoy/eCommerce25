@@ -65,7 +65,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     // products section
     Route::get('/products-page', [ProductController::class, 'index'])->name('product.index');
-    Route::post("/add-product-details", [ProductController::class, 'addProductDetails'])->name('product.details.create');
+    Route::post("/add-product-details", [ProductDetailController::class, 'addProductDetails'])->name('product.details.create');
 
     // Category section
     Route::get('/category-page', [CategoryController::class, 'CategoryPage'])->name('category.index');

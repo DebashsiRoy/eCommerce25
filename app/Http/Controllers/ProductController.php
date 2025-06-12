@@ -235,21 +235,7 @@ class ProductController extends Controller
         ], 201);
     }
 
-    public function addProductDetails(Request $request): JsonResponse
-    {
-        $product_id = $request->id;
-        $data = ProductDetail::create([
-            'product_id' => $product_id,
-            'img1' => $request->input('img1'),
-            'img2' => $request->input('img2'),
-            'img3' => $request->input('img3'),
-            'img4' => $request->input('img4'),
-            'description' => $request->input('description'),
-            'color' => $request->input('color'),
-            'size' => $request->input('size'),
-        ]);
-        return ResponseHelper::Out('success', $data, 200);
-    }
+
 
     public function ProductDetailById(Request $request):JsonResponse
     {

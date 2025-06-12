@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col">
                                         <label class="form-label fs-2 pt-3">Short Description</label>
-                                        <input type="text" class="form-control addCatName border border-info" id="productShortDes">
+                                        <input type="text" class="form-control addCatName border border-info" placeholder="Enter a maximum of 245 characters" id="productShortDes">
                                     </div>
                                 </div>
 

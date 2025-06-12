@@ -4,4 +4,5 @@
     @include('Admin.components.products.product-create')
     @include('Admin.components.products.product-delete')
     @include('Admin.components.products.product-update')
+    @include('Admin.components.products.productDetails-create')
 @endsection

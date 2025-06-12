@@ -1,5 +1,5 @@
 <div class="modal fade border-radius-4" id="deleteProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog deletePopup">
         <div class="modal-content deleteModal">
             <div class="modal-header deleteModal-header">
                 <h3 class="modal-title text-center" id="exampleModalLabel">Delete Product!</h3>
@@ -57,5 +57,8 @@
     }
     .modal-content {
         width: 100% !important;
+    }
+    .deletePopup {
+        width: 450px;
     }
 </style>

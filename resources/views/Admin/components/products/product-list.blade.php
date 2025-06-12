@@ -25,6 +25,7 @@
                                 <th class="productStock" scope="col">Stock</th>
                                 <th class="productStar" scope="col">Star</th>
                                 <th class="productRemark" scope="col">Remark</th>
+                                <th scope="col">Details</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -68,6 +69,9 @@
                 <td>${item['star']}</td>
                 <td>${item['remark']}</td>
                 <td>
+                    <button data-id="${item['id']}" class="btn detailsBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#addDetails" onclick="FillProductDetails(${item['id']})">Add Details</button>
+                </td>
+                <td>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-primary fs-3 rounded-5" type="button" data-bs-toggle="modal" data-bs-target="#updatedProduct">Edit</button>
                     <button data-path="${item['image']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger fs-3 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteProduct">Delete</button>
                 </td>
@@ -75,7 +79,11 @@
             tableList.append(row)
         });
 
-
+        $('.detailsBtn').on('click', async function () {
+            let id = $(this).data('id');
+            await FillProductDetails(id);
+            $("addProductDetails").modal('show');
+        })
         $('.editBtn').on('click', async function () {
             let id= $(this).data('id');
             let filePath= $(this).data('path');

@@ -10,3 +10,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/dataTables.dataTables.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/progress.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/toastify.min.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+
+

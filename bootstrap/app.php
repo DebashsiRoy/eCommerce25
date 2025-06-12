@@ -37,6 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/addTo-cart',
             'http://127.0.0.1:8000/add-slider',
             'http://127.0.0.1:8000/add-policy',
+            'http://127.0.0.1:8000/add-product-details',
 
         ]);
     })
