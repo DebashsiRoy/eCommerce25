@@ -65,7 +65,7 @@
                 </form>
             </div>
             <div class="modal-footer px-5">
-                <button type="button" id="modal-close" class="btn btn-secondary fs-3 border-radius-10" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="modal-details-close" class="btn btn-secondary fs-3 border-radius-10" data-bs-dismiss="modal">Close</button>
                 <button onclick="addProductDetails()" type="button" id="save-btn" class="btn btn-primary fs-3 border-radius-10">Save changes</button>
             </div>
         </div>
@@ -120,7 +120,7 @@
             errorToast("Product Image four is required !")
         }
         else {
-            document.getElementById('modal-close').click();
+            document.getElementById('modal-details-close').click();
             let formData = new FormData();
             formData.append('product_id', productID);
             formData.append('description', productDetails);
@@ -132,12 +132,12 @@
             formData.append('img4', productDTLImg4);
 
             showLoader();
-            let res = await axios.post("/add-product-details", formData, {
+            let res = await axios.post("/add-product-details", formData,{
                 headers: {
                     'content-type': 'multipart/form-data'
                 }
             });
-
+            console.log(res); // 👈 ADD THIS
             hideLoader();
 
             if (res.status===201){
@@ -151,8 +151,6 @@
 
         }
     }
-
-
 
 </script>
 <style>
@@ -213,4 +211,5 @@
         padding: 12px;
         border-color: lightskyblue;
     }
+
 </style>

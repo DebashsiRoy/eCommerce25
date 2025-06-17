@@ -124,7 +124,8 @@ Route::get('/policy-list/{type}', [PolicyController::class, 'PolicyByType'])->na
 Route::get("/policy",[PolicyController::class, 'policyPage'])->name('policy');
 
 Route::get("/product-details",[HomeController::class, 'productDetails'])->name('product.details');
-Route::get("/details-by-id/{id}", [ProductController::class, 'ProductDetailById'])->name('details.by.id');
+Route::get("/productDetailsById/{id}", [ProductController::class, 'ProductDetailById'])->name('details.by.id');
+Route::get("/details", [HomeController::class, 'productDetails'])->name('details.page');
 
 // user login and register page
 Route::get("/user-login", [HomeController::class, 'loginPage'])->name('login-page');

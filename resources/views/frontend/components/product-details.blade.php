@@ -1,25 +1,4 @@
 
-<!-- START SECTION BREADCRUMB -->
-<div class="breadcrumb_section bg_gray page-title-mini">
-    <div class="container"><!-- STRART CONTAINER -->
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="page-title">
-                    <h1>Product Detail</h1>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <ol class="breadcrumb justify-content-md-end">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active">Product Detail</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- END CONTAINER-->
-</div>
-<!-- END SECTION BREADCRUMB -->
-
 <!-- START MAIN CONTENT -->
 <div class="main_content">
 
@@ -30,7 +9,7 @@
                 <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
                     <div class="product-image">
                         <div class="product_img_box">
-                            <img id="product_img" src='assets/images/product_img1.jpg' data-zoom-image="assets/images/product_zoom_img1.jpg" alt="product_img1" />
+                            <img id="product_img1" src='assets/images/product_img1.jpg' data-zoom-image="assets/images/product_zoom_img1.jpg" alt="product_img1" />
                             <a href="#" class="product_img_zoom" title="Zoom">
                                 <span class="linearicons-zoom-in"></span>
                             </a>
@@ -38,22 +17,22 @@
                         <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
                             <div class="item">
                                 <a href="#" class="product_gallery_item active" data-image="assets/images/product_img1.jpg" data-zoom-image="assets/images/product_zoom_img1.jpg">
-                                    <img src="assets/images/product_small_img1.jpg" alt="product_small_img1" />
+                                    <img id="img1" src="assets/images/shop_banner_img4.jpg" alt="product_small_img1" style="width: 150px; height: 160px"/>
                                 </a>
                             </div>
                             <div class="item">
                                 <a href="#" class="product_gallery_item" data-image="assets/images/product_img1-2.jpg" data-zoom-image="assets/images/product_zoom_img2.jpg">
-                                    <img src="assets/images/product_small_img2.jpg" alt="product_small_img2" />
+                                    <img id="img2" src="assets/images/product_small_img2.jpg" alt="product_small_img2" style="width: 150px; height: 160px"/>
                                 </a>
                             </div>
                             <div class="item">
                                 <a href="#" class="product_gallery_item" data-image="assets/images/product_img1-3.jpg" data-zoom-image="assets/images/product_zoom_img3.jpg">
-                                    <img src="assets/images/product_small_img3.jpg" alt="product_small_img3" />
+                                    <img id="img3" src="assets/images/product_small_img3.jpg" alt="product_small_img3" style="width: 150px; height: 160px"/>
                                 </a>
                             </div>
                             <div class="item">
                                 <a href="#" class="product_gallery_item" data-image="assets/images/product_img1-4.jpg" data-zoom-image="assets/images/product_zoom_img4.jpg">
-                                    <img src="assets/images/product_small_img4.jpg" alt="product_small_img4" />
+                                    <img id="img4" src="assets/images/product_small_img4.jpg" alt="product_small_img4" style="width: 150px; height: 160px"/>
                                 </a>
                             </div>
                         </div>
@@ -62,12 +41,12 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="pr_detail">
                         <div class="product_description">
-                            <h4 class="product_title"><a href="#">Blue Dress For Woman</a></h4>
+                            <h4 class="product_title"><a id="p_title" href="#">Blue Dress For Woman</a></h4>
                             <div class="product_price">
-                                <span class="price">$45.00</span>
-                                <del>$55.25</del>
+                                <span id="discount_price" class="price">$45.00</span>
+                                <del id="p_price">$55.25</del>
                                 <div class="on_sale">
-                                    <span>35% Off</span>
+                                    <span id="p_discount">35% </span><span>% Off</span>
                                 </div>
                             </div>
                             <div class="rating_wrap">
@@ -77,7 +56,7 @@
                                 <span class="rating_num">(21)</span>
                             </div>
                             <div class="pr_desc">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                <p id="pr_short_description">1111111Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
                             </div>
                             <div class="product_sort_info">
                                 <ul>
@@ -88,20 +67,14 @@
                             </div>
                             <div class="pr_switch_wrap">
                                 <span class="switch_lable">Color</span>
-                                <div class="product_color_switch">
-                                    <span class="active" data-color="#87554B"></span>
-                                    <span data-color="#333333"></span>
-                                    <span data-color="#DA323F"></span>
+                                <div id="pr_color" class="product_color_switch">
+
                                 </div>
                             </div>
                             <div class="pr_switch_wrap">
                                 <span class="switch_lable">Size</span>
-                                <div class="product_size_switch">
-                                    <span>xs</span>
-                                    <span>s</span>
-                                    <span>m</span>
-                                    <span>l</span>
-                                    <span>xl</span>
+                                <div id="pr_size" class="product_size_switch">
+
                                 </div>
                             </div>
                         </div>
@@ -161,8 +134,8 @@
                         </ul>
                         <div class="tab-content shop_info_tab">
                             <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Vivamus bibendum magna Lorem ipsum dolor sit amet, consectetur adipiscing elit.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                                <p >Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Vivamus bibendum magna Lorem ipsum dolor sit amet, consectetur adipiscing elit.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+
                             </div>
                             <div class="tab-pane fade" id="Additional-info" role="tabpanel" aria-labelledby="Additional-info-tab">
                                 <table class="table table-bordered">
@@ -222,7 +195,7 @@
                                                     <span class="comment-date">June 17, 2018</span>
                                                 </p>
                                                 <div class="description">
-                                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
+                                                    <p>11111It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -493,3 +466,73 @@
         </div>
     </div>
     <!-- END SECTION SHOP -->
+
+</div>
+<!-- END MAIN CONTENT -->
+    <script>
+        function imgPath(file) {
+            return `/storage/${file}`;
+        }
+
+        let searchParams = new URLSearchParams(window.location.search)
+        let id =searchParams.get('id');
+
+        productDetails();
+        async function productDetails(){
+            let res = await axios.get("/productDetailsById/"+id);
+            let Details = await res.data['data'];
+
+            // Set main image src and zoom image
+            document.getElementById('product_img1').src=Details[0]['img1'];
+            document.getElementById('product_img1').setAttribute('data-zoom-image', Details[0]['img1']);
+
+// Set gallery image src + zoom/image data attributes
+            document.getElementById('img1').src=Details[0]['img1'];
+            document.getElementById('img1').parentElement.setAttribute('data-image', Details[0]['img1']);
+            document.getElementById('img1').parentElement.setAttribute('data-zoom-image', Details[0]['img1']);
+
+            document.getElementById('img2').src=Details[0]['img2'];
+            document.getElementById('img2').parentElement.setAttribute('data-image', Details[0]['img2']);
+            document.getElementById('img2').parentElement.setAttribute('data-zoom-image', Details[0]['img2']);
+
+            document.getElementById('img3').src=Details[0]['img3'];
+            document.getElementById('img3').parentElement.setAttribute('data-image', Details[0]['img3']);
+            document.getElementById('img3').parentElement.setAttribute('data-zoom-image', Details[0]['img3']);
+
+            document.getElementById('img4').src=Details[0]['img4'];
+            document.getElementById('img4').parentElement.setAttribute('data-image', Details[0]['img4']);
+            document.getElementById('img4').parentElement.setAttribute('data-zoom-image', Details[0]['img4']);
+
+
+            document.getElementById('p_title').innerText=Details[0]['product']['title'];
+            document.getElementById('discount_price').innerText=Details[0]['product']['discount_price'];
+            document.getElementById('p_price').innerText=Details[0]['product']['price'];
+            document.getElementById('p_discount').innerText=Details[0]['product']['discount'];
+            document.getElementById('pr_short_description').innerHTML=Details[0]['product']['short_des'];
+
+            document.getElementById('Description').innerText=Details[0]['description'];
+
+            // Product Size & Color
+            let size = Details[0]['size'].split(',');
+            let color = Details[0]['color'].split(',');
+
+
+            $("#pr_size").empty();
+            size.forEach((item)=>{
+                let option=`<span value="${item}">${item}</span>`;
+                $("#pr_size").append(option);
+            })
+
+            $("#pr_color").empty();
+            color.forEach((item)=>{
+                let option=`<span class="pr_details_color" value="${item}">${item}</span>`;
+                $("#pr_color").append(option);
+            })
+
+
+
+        }
+    </script>
+
+
+

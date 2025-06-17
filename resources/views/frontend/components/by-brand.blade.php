@@ -41,7 +41,7 @@
                                             </ul>
                                         </div>
                                         <div class="product_info">
-                                        <h6 class="product_title"><a href="/details?id=${item['id']}">${item['title']}</a></h6>
+                                        <h6 class="product_title"><a href="/details-by-id?id=${item['id']}">${item['title']}</a></h6>
                                         <div class="product_price">
                                             <span class="price">$ ${item['price']}</span>
                                         </div>

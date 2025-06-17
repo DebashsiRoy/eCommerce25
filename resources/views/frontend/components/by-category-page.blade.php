@@ -32,11 +32,16 @@
         let res=await axios.get(`/byCategoryListById/${id}`);
         $("#byCategoryList").empty();
         res.data['data'].forEach((item,i)=>{
-            let EachItem=`<div class="col-lg-3 col-md-4 col-6">
+            let EachItem=`    <div class="col-lg-3 col-md-4 col-6">
                                 <div class="product">
                                     <div class="product_img">
+                                        <div class="product_action_box">
+                                            <ul class="list_none pr_action_btn">
+                                                <li><a href="" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                            </ul>
+                                        </div>
                                         <a href="#">
-                                            <img src="${item['image']}" class="popup-ajax" alt="${item['title']}"><i class="icon-magnifier-add"></i></a></li>
+                                            <img src="${item['image']}" class="popup-ajax" alt="${item['title']}"></a></li>
 
                                             </ul>
                                         </div>
@@ -50,6 +55,7 @@
                                                 <div class="product_rate" style="width:${item['star']}%"></div>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>`
@@ -66,5 +72,8 @@
         height: 150px;
         margin: 0 auto;
         padding-top: 5px;
+    }
+    .list_none.pr_action_btn {
+        margin-top: 42px;
     }
 </style>
