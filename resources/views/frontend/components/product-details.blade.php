@@ -41,12 +41,12 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="pr_detail">
                         <div class="product_description">
-                            <h4 class="product_title"><a id="p_title" href="#">Blue Dress For Woman</a></h4>
+                            <h4 class="product_title"><a id="p_title" href="#"></a></h4>
                             <div class="product_price">
-                                <span id="discount_price" class="price">$45.00</span>
-                                <del id="p_price">$55.25</del>
+                                <span id="discount_price" class="price"></span>
+                                <del id="p_price"></del>
                                 <div class="on_sale">
-                                    <span id="p_discount">35% </span><span>% Off</span>
+                                    <span id="p_discount"></span><span>% Off</span>
                                 </div>
                             </div>
                             <div class="rating_wrap">
@@ -56,7 +56,7 @@
                                 <span class="rating_num">(21)</span>
                             </div>
                             <div class="pr_desc">
-                                <p id="pr_short_description">1111111Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                <p id="pr_short_description"></p>
                             </div>
                             <div class="product_sort_info">
                                 <ul>
@@ -65,32 +65,37 @@
                                     <li><i class="linearicons-bag-dollar"></i> Cash on Delivery available</li>
                                 </ul>
                             </div>
-                            <div class="pr_switch_wrap">
-                                <span class="switch_lable">Color</span>
-                                <div id="pr_color" class="product_color_switch">
+                            <label class="form-label">Size</label>
+                            <select id="pr_size" class="form-select">
+                            </select>
 
-                                </div>
-                            </div>
-                            <div class="pr_switch_wrap">
-                                <span class="switch_lable">Size</span>
-                                <div id="pr_size" class="product_size_switch">
 
-                                </div>
-                            </div>
+                            <label class="form-label">Color</label>
+                            <select id="pr_color" class="form-select">
+
+                            </select>
+
+
+{{--                            <div id="productSize" class="pr_switch_wrap">--}}
+{{--                                <span class="switch_lable">Size</span>--}}
+{{--                                <div id="pr_size" class="product_size_switch">--}}
+
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                         <hr />
                         <div class="cart_extra">
                             <div class="cart-product-quantity">
-                                <div class="quantity">
+                                <div id="pr_qty" class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input id="product_qty" type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
                             <div class="cart_btn">
-                                <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</button>
+                                <button onclick="getToCart()" class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</button>
                                 <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
-                                <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                                <a onclick="AddToWishList()" class="add_wishlist" href="#"><i class="icon-heart"></i></a>
                             </div>
                         </div>
                         <hr />
@@ -254,7 +259,7 @@
                                     </a>
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                            <li onclick="getToCart()" class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                             <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
                                             <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
                                             <li><a href="#"><i class="icon-heart"></i></a></li>
@@ -297,7 +302,7 @@
                                     </a>
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                            <li onclick="getToCart()" class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                             <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
                                             <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
                                             <li><a href="#"><i class="icon-heart"></i></a></li>
@@ -341,7 +346,7 @@
                                     </a>
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                            <li onclick="getToCart()" class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                                             <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a></li>
                                             <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
                                             <li><a href="#"><i class="icon-heart"></i></a></li>
@@ -516,22 +521,98 @@
             let size = Details[0]['size'].split(',');
             let color = Details[0]['color'].split(',');
 
-
-            $("#pr_size").empty();
+            let SizeOption=`<option value=''>Choose Size</option>`;
+            $("#pr_size").append(SizeOption);
             size.forEach((item)=>{
-                let option=`<span value="${item}">${item}</span>`;
+                let option=`<option value='${item}'>${item}</option>`;
                 $("#pr_size").append(option);
             })
 
-            $("#pr_color").empty();
+
+            let ColorOption=`<option value=''>Choose Color</option>`;
+            $("#pr_color").append(ColorOption);
             color.forEach((item)=>{
-                let option=`<span class="pr_details_color" value="${item}">${item}</span>`;
+                let option=`<option value='${item}'>${item}</option>`;
                 $("#pr_color").append(option);
             })
 
-
-
         }
+
+        async function getToCart() {
+            const searchParams = new URLSearchParams(window.location.search);
+            const id = searchParams.get('id');
+
+            try {
+                const pr_size = document.getElementById('pr_size').value;
+                const pr_color = document.getElementById('pr_color').value;
+                const product_qty = document.getElementById('product_qty').value;
+
+                // Input Validation
+                if (!pr_size) {
+                    alert("Product Size Required!");
+                    return;
+                }
+                if (!pr_color) {
+                    alert("Product Color Required!");
+                    return;
+                }
+                if (!product_qty || parseInt(product_qty) <= 0) {
+                    alert("Valid Product Quantity Required!");
+                    return;
+                }
+
+                // Show loader
+                $(".preloader").fadeIn(100).removeClass('loaded');
+
+                // Send request
+                const res = await axios.post("/addTo-cart", {
+                    product_id: id,
+                    color: pr_color,
+                    size: pr_size,
+                    qty: product_qty
+                });
+
+                // Hide loader
+                $(".preloader").fadeOut(100).addClass('loaded');
+
+                // Success response
+                if (res.status === 200) {
+                    alert("Product added to cart successfully!");
+                }
+
+            } catch (e) {
+                // Hide loader on error
+                $(".preloader").fadeOut(100).addClass('loaded');
+
+                // Redirect to login on 401
+                if (e.response && e.response.status === 401) {
+                    sessionStorage.setItem("last_location", window.location.href);
+                    window.location.href = "/login";
+                    
+                } else {
+                    console.error(e);
+                    alert("Something went wrong. Please try again.");
+                }
+            }
+        }
+
+
+        async function AddToWishList() {
+            try{
+                $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+                let res = await axios.get("/create-wishlist/"+id);
+                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+                if(res.status===200){
+                    alert("Request Successful")
+                }
+            }catch (e) {
+                if(e.response.status===401){
+                    sessionStorage.setItem("last_location",window.location.href)
+                    window.location.href="/login"
+                }
+            }
+        }
+
     </script>
 
 

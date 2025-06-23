@@ -37,6 +37,7 @@
 {{--                                    </div>--}}
                                     <a href="#">Forgot password?</a>
                                 </div>
+                                <input type="hidden" name="last_location" id="last_location" />
                                 <div class="form-group mb-3">
                                     <button type="submit" class="btn btn-fill-out btn-block" name="login">Log in</button>
                                 </div>
@@ -63,4 +64,23 @@
         (async () =>{
             $(".preloader").delay(50).fadeOut(100).addClass('loaded')
         })()
+        document.addEventListener("DOMContentLoaded", function () {
+            const lastLocation = sessionStorage.getItem("last_location");
+            if (lastLocation) {
+                document.getElementById("last_location").value = lastLocation;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const lastLocation = sessionStorage.getItem('last_location');
+            if (form && lastLocation) {
+                let input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'last_location';
+                input.value = lastLocation;
+                form.appendChild(input);
+                sessionStorage.removeItem('last_location');
+            }
+        });
     </script>

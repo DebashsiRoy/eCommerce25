@@ -13,19 +13,13 @@ class UserController extends Controller
     {
         return view('home');
     }
-    public function userDashboard()
-    {
-        return view('frontend.components.user-dashboard');
-    }
+
     public function userProfileIndex()
     {
         return view('layouts.profile-page');
     }
 
-    function accountDetails()
-    {
-        return view('frontend.components.account-details');
-    }
+
 
     function userProfile(Request $request)
     {

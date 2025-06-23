@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductCartsController extends Controller
 {
+    public function cartPage()
+    {
+        return view('frontend.pages.cart-list-page');
+    }
     public function CreateCartList(Request $request): JsonResponse
     {
         $user_id = Auth::id();
@@ -50,17 +54,37 @@ class ProductCartsController extends Controller
         return ResponseHelper::Out('success', $data, 200);
     }
 
-    public function DeleteCartList(Request $request): JsonResponse
-
+    public function deleteCartItem($product_id): JsonResponse
     {
         $user_id = Auth::id();
-        $data = ProductCarts::where('user_id','=', $user_id)->where('product_id', '=', $request->product_id)->delete();
-        return ResponseHelper::Out('success', $data, 200);
+
+        if (!$user_id) {
+            return response()->json([
+                'status' => 'unauthorized',
+                'message' => 'User not logged in.'
+            ], 401);
+        }
+
+        $deleted = ProductCarts::where('user_id', $user_id)
+            ->where('product_id', $product_id)
+            ->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Item removed from cart.',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Item not found or already removed.',
+            ], 404);
+        }
     }
 
     function CreatePayment(Request $request): JsonResponse
     {
-        
+
     }
 
 

@@ -7213,7 +7213,7 @@ blockquote p:last-child {
 }
 .dashboard_content .table tbody tr td {
 	vertical-align: middle;
-	white-space: nowrap;
+	white-space: collapse;
 }
 .dashboard_content label {
 	color: #333;

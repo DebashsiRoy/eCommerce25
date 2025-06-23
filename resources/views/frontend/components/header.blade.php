@@ -27,12 +27,12 @@
                     <div class="text-center text-md-end">
                         <ul class="header_list">
                             <li><a href="/policy?type=about"><span>About us</span></a></li>
-                            <li><a href="wishlist.html"><i class="ti-heart"></i><span>Wishlist</span></a></li>
+                            <li><a href="{{ route('wish.list') }}"><i class="ti-heart"></i><span>Wishlist</span></a></li>
 
                             @guest
                                 <li><a href="{{ route('login') }}"><i class="ti-user"></i><span>Login</span></a></li>
                             @else
-                                <li><a href="{{ Auth::user()->usertype==='admin' ? route('admin.index'): route('home.index') }}"><i class="ti-user"></i><span><span class="">{{ Auth::user()->name }}</span></span></a></li>
+                                <li><a href="{{ Auth::user()->usertype==='admin' ? route('admin.index'): route('user.account') }}"><i class="ti-user"></i><span><span class="">{{ Auth::user()->name }}</span></span></a></li>
 
                             @endguest
 
@@ -188,7 +188,7 @@
                             </form>
                         </div><div class="search_overlay"></div>
                     </li>
-                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
+                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="{{ route('product.cart') }}" data-bs-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
                         <div class="cart_box dropdown-menu dropdown-menu-right">
                             <ul class="cart_list">
                                 <li>
@@ -204,7 +204,7 @@
                             </ul>
                             <div class="cart_footer">
                                 <p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>159.00</p>
-                                <p class="cart_buttons"><a href="#" class="btn btn-fill-line rounded-0 view-cart">View Cart</a><a href="#" class="btn btn-fill-out rounded-0 checkout">Checkout</a></p>
+                                <p class="cart_buttons"><a href="{{ route('product.cart') }}" class="btn btn-fill-line rounded-0 view-cart">View Cart</a><a href="#" class="btn btn-fill-out rounded-0 checkout">Checkout</a></p>
                             </div>
                         </div>
                     </li>

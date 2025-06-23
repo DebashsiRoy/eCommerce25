@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-profile', [UserController::class, 'userProfile'])->name('profile.details');
     Route::get('/user-account-details', [UserController::class, 'accountDetails'])->name('user.account.details');
     Route::post('/user-profile-update', [UserController::class, 'UpdateProfile'])->name('user.profile.update');
+    Route::get("/user-account", [HomeController::class, 'accountPage'])->name('user.account');
     // Customer Profile
     Route::post('/customer-profile', [CustomerProfileController::class, 'CreateCustomerProfile'])->name('customer.profile');
     Route::get('/readProfile', [CustomerProfileController::class, 'ReadProfile'])->name('customer.page');
@@ -43,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     // Product Cart
     Route::post('/addTo-cart',[ProductCartsController::class, 'CreateCartList'])->name('addTo.cart');
     Route::get('/cart-list',[ProductCartsController::class, 'CartList'])->name('cart.list');
-    Route::get('/delete-cart/{product_id}',[ProductCartsController::class, 'DeleteCartList'])->name('cart.delete');
+    Route::get('/delete-cart/{product_id}',[ProductCartsController::class, 'deleteCartItem'])->name('cart.delete');
 
     // Invoice
     Route::get('/create-invoice',[invoiceController::class, 'InvoiceCreate'])->name('create.invoice');
@@ -126,6 +127,8 @@ Route::get("/policy",[PolicyController::class, 'policyPage'])->name('policy');
 Route::get("/product-details",[HomeController::class, 'productDetails'])->name('product.details');
 Route::get("/productDetailsById/{id}", [ProductController::class, 'ProductDetailById'])->name('details.by.id');
 Route::get("/details", [HomeController::class, 'productDetails'])->name('details.page');
+Route::get("/wishlist-page", [ProductWishController::class , 'wishList'])->name('wish.list');
+Route::get('/product-cart', [ProductCartsController::class, 'cartPage'])->name('product.cart');
 
 // user login and register page
 Route::get("/user-login", [HomeController::class, 'loginPage'])->name('login-page');

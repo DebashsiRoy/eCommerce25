@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductWishController extends Controller
 {
+    public function wishList()
+    {
+        return view('frontend.pages.wish-list-page');
+    }
     public function productWishList(Request $request): JsonResponse
     {
         $user_id = Auth::user()->id;
@@ -22,13 +26,21 @@ class ProductWishController extends Controller
 
     public function CreateWishList(Request $request)
     {
-        $user_id = Auth::id();
+        if (!Auth::check()) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Unauthorized. Please login first.'
+            ], 401); // HTTP 401 Unauthorized
+        }
+        else{
+            $user_id = Auth::id();
+            $data = ProductWish::updateOrCreate(
+                ['user_id' => $user_id, 'product_id' => $request->product_id],
+                ['user_id' => $user_id, 'product_id' => $request->product_id],
+            );
+            return ResponseHelper::Out('success', $data, 200);
+        }
 
-        $data = ProductWish::updateOrCreate(
-            ['user_id' => $user_id, 'product_id' => $request->product_id],
-            ['user_id' => $user_id, 'product_id' => $request->product_id],
-        );
-        return ResponseHelper::Out('success', $data, 200);
     }
 
 
