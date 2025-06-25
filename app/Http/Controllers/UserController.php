@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerProfile;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,7 +19,6 @@ class UserController extends Controller
     {
         return view('layouts.profile-page');
     }
-
 
 
     function userProfile(Request $request)

@@ -17,6 +17,7 @@ use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use App\Models\Brand;
+use App\Models\CustomerProfile;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
@@ -123,6 +124,7 @@ Route::get("/byBrandListById/{id}", [ProductController::class, 'ListProductBrand
 
 Route::get('/policy-list/{type}', [PolicyController::class, 'PolicyByType'])->name('policy-list');
 Route::get("/policy",[PolicyController::class, 'policyPage'])->name('policy');
+
 
 Route::get("/product-details",[HomeController::class, 'productDetails'])->name('product.details');
 Route::get("/productDetailsById/{id}", [ProductController::class, 'ProductDetailById'])->name('details.by.id');

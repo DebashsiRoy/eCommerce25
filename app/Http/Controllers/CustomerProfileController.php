@@ -17,8 +17,7 @@ class CustomerProfileController extends Controller
     {
         $user_id = Auth::id();
         $request->merge(['user_id' => $user_id]);
-        $data = CustomerProfile::updateOrCreate
-        (
+        $data = CustomerProfile::updateOrCreate(
             ['user_id' => $user_id],
             $request->input()
         );

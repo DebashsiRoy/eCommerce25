@@ -15,7 +15,7 @@
 <script src="{{ asset('frontend/assets/js/waypoints.min.js') }}"></script>
 <!-- parallax js  -->
 <script src="{{ asset('frontend/assets/js/parallax.js') }}"></script>
-
+<script src="{{ asset('frontend/assets/js/toastify-js.js') }}"></script>
 
 <script src="{{ asset('frontend/assets/js/imagesloaded.pkgd.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/isotope.min.js') }}"></script>

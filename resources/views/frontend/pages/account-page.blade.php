@@ -7,6 +7,7 @@
     <script>
         (async () =>{
             await  orderListDetails();
+            await  customerProfileRead();
             $(".preloader").delay(50).fadeOut(100).addClass('loaded')
         })()
     </script>
