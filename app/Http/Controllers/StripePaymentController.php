@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\ProductCarts;
+use Auth;
 use Illuminate\Http\Request;
+
+
 
 class StripePaymentController extends Controller
 {
@@ -14,9 +18,13 @@ class StripePaymentController extends Controller
         if ($invoice) {
             $invoice->payment_status = 'Success';
             $invoice->save();
+            $user_id = Auth::id(); // ✅ get the current user
+            ProductCarts::where('user_id', $user_id)->delete(); // ✅ clear the cart
         }
 
-        return 1;
+
+        return redirect('/')->with('success', 'Payment successful and cart cleared.');
+
     }
 
     public function cancel(Request $request)

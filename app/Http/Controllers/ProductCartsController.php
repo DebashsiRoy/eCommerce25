@@ -82,14 +82,6 @@ class ProductCartsController extends Controller
         }
     }
 
-    function CreatePayment(Request $request): JsonResponse
-    {
-
-    }
-
-
-
-
 
 }
 

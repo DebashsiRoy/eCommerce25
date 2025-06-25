@@ -43,7 +43,7 @@
                     <div class="widget">
                         <h6 class="widget_title">My Account</h6>
                         <ul class="widget_links">
-                            <li><a href="#">My Account</a></li>
+                            <li><a href="/user-account">My Account</a></li>
                             <li><a href="#">Discount</a></li>
                             <li><a href="#">Returns</a></li>
                             <li><a href="#">Orders History</a></li>
