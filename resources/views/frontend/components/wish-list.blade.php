@@ -35,8 +35,7 @@
                                 <th class="product-thumbnail">Image</th>
                                 <th class="product-name">Product</th>
                                 <th class="product-price">Price</th>
-                                <th class="product-stock-status">Stock Status</th>
-                                <th class="product-add-to-cart"></th>
+                                <th class="product-add-to-cart">Add to Cart</th>
                                 <th class="product-remove">Remove</th>
                             </tr>
                             </thead>
@@ -58,12 +57,15 @@
             res.data['data'].forEach((item, i)=> {
                 let wishItem = `
                             <tr>
-                                <td class="product-thumbnail d-none"><a href="#"><img src="${item['product']['id']}" alt="product1"></a></td>
-                                <td class="product-thumbnail"><a href="#"><img src="${item['product']['image']}" alt="product1"></a></td>
-                                <td class="product-name" data-title="Product"><a href="#">${item['product']['title']}</a></td>
+                                <td class="product-thumbnail d-none"><a href="/details?id=${item['id']}"><img src="${item['product']['id']}" alt="product1"></a></td>
+                                <td class="product-thumbnail"><a href="/details?id=${item['id']}"><img src="${item['product']['image']}" alt="product1"></a></td>
+                                <td class="product-name" data-title="Product"><a href="/details?id=${item['id']}">${item['product']['title']}</a></td>
                                 <td class="product-price" data-title="Price">${item['product']['discount_price']}</td>
-                                <td class="product-stock-status" data-title="Stock Status"><span class="badge rounded-pill text-bg-success">In Stock</span></td>
-                                <td onclick="getToCart()" class="product-add-to-cart"><a href="#" class="btn btn-fill-out"><i class="icon-basket-loaded"></i> Add to Cart</a></td>
+                                <td class="product-add-to-cart">
+                                  <a href="#" class="btn btn-fill-out addToCartBtn" data-id="${item['product']['id']}">
+                                    <i class="icon-basket-loaded"></i> Add to Cart
+                                  </a>
+                                </td>
                                 <td data-id="${item['product']['id']}" class="product-remove remove" data-title="Remove"><a href="#"><i class="ti-close"></i></a></td>
                             </tr>
 
@@ -90,6 +92,38 @@
                 alert("Request Fail ")
             }
         }
+
+
+        //===================================================================
+
+        $(document).on('click', '.addToCartBtn', async function (e) {
+            e.preventDefault();
+
+            const productId = $(this).data('id');
+
+            try {
+                $(".preloader").fadeIn(100).removeClass('loaded');
+
+                const res = await axios.post("/addTo-cart", {
+                    product_id: productId,
+                    color: "default",   // ✅ Change if you have dropdowns or options
+                    size: "default",
+                    qty: 1
+                });
+
+                $(".preloader").fadeOut(100).addClass('loaded');
+
+                if (res.status === 200) {
+                    alert("Product added to cart!");
+                    await removeWishList(productId);
+                }
+
+            } catch (e) {
+                $(".preloader").fadeOut(100).addClass('loaded');
+                console.error(e);
+                alert("Failed to add to cart.");
+            }
+        });
 
 
     </script>

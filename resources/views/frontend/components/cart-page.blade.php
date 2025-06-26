@@ -67,8 +67,8 @@
             let grandTotal = 0; // Moved outside the loop
 
             res.data['data'].forEach((item, i) => {
-                let price = parseFloat(item.product.discount_price || item.product.price);
-                let qty = parseInt(item.qty);
+                let price = item['product']['price'];
+                let qty = item['qty'];
                 let subTotal = (price * qty).toFixed(2);
 
                 grandTotal += parseFloat(subTotal); // Accumulate here
@@ -139,10 +139,13 @@
                        <tr>
                             <td>
                                 <ul class="list-group">
-                                    <li class="list-group-item"><div class="d-flex justify-content-between"><h5>Product 1</h5><span>$500</span></div></li>
+                                    <li class="list-group-item"><div class="d-flex justify-content-between"><h5>Total: </h5><span>${item['total']}</span></div></li>
                                 </ul>
                                 <ul class="list-group">
-                                    <li class="list-group-item"><div class="d-flex justify-content-between">Total payable: <span>$500</span></div></li>
+                                    <li class="list-group-item"><div class="d-flex justify-content-between">VAT+: <span>${item['vat']}</span></div></li>
+                                </ul>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><div class="d-flex justify-content-between">Payable: <span>${item['payable']}</span></div></li>
                                 </ul>
                                 <a class="btn btn-danger btn-sm" href="${item['payment_url']}">Pay</a>
                             </td>

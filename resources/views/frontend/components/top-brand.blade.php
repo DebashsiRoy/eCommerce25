@@ -29,17 +29,18 @@
                     <div class="p-2 col-2">
                         <div class="product">
                             <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="/list-by-brand?id=${item['id']}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                    </ul>
+                                <ul class="list_none pr_action_btn">
+                                    <li><a href="/details?id=${item['id']}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                </ul>
                             </div>
+
                             <div class="product_img">
-                                <a href="/list-by-brand?id=2">
+                                <a href="/details?id=${item['id']}">
                                     <img src="${item['brandImg']}" alt="${item['brandName']}">
                                 </a>
                             </div>
                             <div class="product_info">
-                                <h6 class="product_title"><a href="/list-by-brand?id=${item['id']}">${item['brandName']}</a></h6>
+                                <h6 class="product_title"><a href="/details?id=${item['id']}">${item['brandName']}</a></h6>
                             </div>
                         </div>
                     </div>
