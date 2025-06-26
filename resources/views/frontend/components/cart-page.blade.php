@@ -147,6 +147,9 @@
                                 <ul class="list-group">
                                     <li class="list-group-item"><div class="d-flex justify-content-between">Payable: <span>${item['payable']}</span></div></li>
                                 </ul>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><div class="d-flex justify-content-between"><p class="payWithText">Pay With: </p><span><img class="amazonPay" src="/frontend/paymentIcon/amazon pay.png"></span><span><img src="/frontend/paymentIcon/card.png"></span><span><p class="payWithText">Pay with oter's</p></span></div></li>
+                                </ul>
                                 <a class="btn btn-danger btn-sm" href="${item['payment_url']}">Pay</a>
                             </td>
                         </tr>
@@ -170,6 +173,13 @@
             font-weight: bold;
             font-size: 19px;
             margin-top: 10px;
+        }
+        img.amazonPay {
+            width: 108px;
+        }
+        p.payWithText {
+            color: firebrick;
+            font-weight: 600;
         }
 
     </style>

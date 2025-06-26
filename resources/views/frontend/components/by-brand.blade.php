@@ -35,13 +35,16 @@
             let EachItem=`<div class="col-lg-3 col-md-4 col-6">
                                 <div class="product">
                                     <div class="product_img">
-                                        <a href="#">
-                                            <img src="${item['image']}" class="popup-ajax" alt="${item['title']}"><i class="icon-magnifier-add"></i></a></li>
+                                           <div class="product_action_box">
+                                                <ul class="list_none pr_action_btn">
+                                                    <li><a href="/details?id=${item['id']}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                </ul>
+                                            </div>
 
-                                            </ul>
+                                            <ul> <a href="#"><img src="${item['image']}" class="popup-ajax" alt="${item['title']}"></a></li></ul>
                                         </div>
                                         <div class="product_info">
-                                        <h6 class="product_title"><a href="/details-by-id?id=${item['id']}">${item['title']}</a></h6>
+                                        <h6 class="product_title"><a href="/details?id=${item['id']}">${item['title']}</a></h6>
                                         <div class="product_price">
                                             <span class="price">$ ${item['price']}</span>
                                         </div>
@@ -66,5 +69,8 @@
         height: 150px;
         margin: 0 auto;
         padding-top: 5px;
+    }
+    .popup-ajax {
+        position: revert;
     }
 </style>
