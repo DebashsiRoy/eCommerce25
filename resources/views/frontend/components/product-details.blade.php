@@ -130,108 +130,53 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Description</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info" role="tab" aria-controls="Additional-info" aria-selected="false">Additional info</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">Reviews (2)</a>
                             </li>
                         </ul>
                         <div class="tab-content shop_info_tab">
+
+                        {{--  Product Description section--}}
+
                             <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
                                 <p >Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Vivamus bibendum magna Lorem ipsum dolor sit amet, consectetur adipiscing elit.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                            </div>
 
-                            </div>
-                            <div class="tab-pane fade" id="Additional-info" role="tabpanel" aria-labelledby="Additional-info-tab">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td>Capacity</td>
-                                        <td>5 Kg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Color</td>
-                                        <td>Black, Brown, Red,</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Water Resistant</td>
-                                        <td>Yes</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Material</td>
-                                        <td>Artificial Leather</td>
-                                    </tr>
-                                </table>
-                            </div>
+{{--                            List Product Review Section--}}
+
                             <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
                                 <div class="comments">
                                     <h5 class="product_tab_title">2 Review For <span>Blue Dress For Woman</span></h5>
-                                    <ul class="list_none comment_list mt-4">
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="assets/images/user1.jpg" alt="user1"/>
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:80%"></div>
-                                                    </div>
-                                                </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">Alea Brooks</span>
-                                                    <span class="comment-date">March 5, 2018</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="assets/images/user2.jpg" alt="user2"/>
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">Grace Wong</span>
-                                                    <span class="comment-date">June 17, 2018</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>11111It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-                                                </div>
-                                            </div>
-                                        </li>
+                                    {{--  Product Review Display Section--}}
+                                    <ul id="listProductReview1" class="list_none comment_list mt-4">
+
                                     </ul>
+                                    {{--  Product Review Display Section End Here--}}
                                 </div>
                                 <div class="review_form field_form">
                                     <h5>Add a review</h5>
-                                    <form class="row mt-3">
+                                    {{--  Product Review Submit Section--}}
+                                    <form id="" class="row mt-3">
                                         <div class="form-group col-12 mb-3">
-                                            <div class="star_rating">
-                                                <span data-value="1"><i class="far fa-star"></i></span>
-                                                <span data-value="2"><i class="far fa-star"></i></span>
-                                                <span data-value="3"><i class="far fa-star"></i></span>
-                                                <span data-value="4"><i class="far fa-star"></i></span>
-                                                <span data-value="5"><i class="far fa-star"></i></span>
+                                            <div id="reviewRating" class="star_rating">
+                                                <span data-value="1"><i class="far fa-star star"></i></span>
+                                                <span data-value="2"><i class="far fa-star star"></i></span>
+                                                <span data-value="3"><i class="far fa-star star"></i></span>
+                                                <span data-value="4"><i class="far fa-star star"></i></span>
+                                                <span data-value="5"><i class="far fa-star star"></i></span>
                                             </div>
                                         </div>
                                         <div class="form-group col-12 mb-3">
-                                            <textarea required="required" placeholder="Your review *" class="form-control" name="message" rows="4"></textarea>
-                                        </div>
-                                        <div class="form-group col-md-6 mb-3">
-                                            <input required="required" placeholder="Enter Name *" class="form-control" name="name" type="text">
-                                        </div>
-                                        <div class="form-group col-md-6 mb-3">
-                                            <input required="required" placeholder="Enter Email *" class="form-control" name="email" type="email">
+                                            <textarea id="reviewText" required="required" placeholder="Your review *" class="form-control" name="message" rows="4"></textarea>
                                         </div>
 
+
                                         <div class="form-group col-12 mb-3">
-                                            <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">Submit Review</button>
+                                            <button onclick="submitRating()" type="button" class="btn btn-danger">Add Review</button>
                                         </div>
                                     </form>
+                                    {{--  Product Review Submit Section End--}}
                                 </div>
                             </div>
                         </div>
@@ -422,6 +367,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="item">
                             <div class="product">
                                 <div class="product_img">
@@ -588,7 +534,7 @@
                 if (e.response && e.response.status === 401) {
                     sessionStorage.setItem("last_location", window.location.href);
                     window.location.href = "/login";
-                    
+
                 } else {
                     console.error(e);
                     alert("Something went wrong. Please try again.");
@@ -613,7 +559,121 @@
             }
         }
 
+        // ==========Product Review Section=====================//
+        let productStarRating = document.querySelectorAll('.star');
+        let currentRating = 0;
+
+        productStarRating.forEach((star, index) => {
+            star.addEventListener("click", () => {
+                currentRating = index + 1;
+            });
+        });
+
+        async function submitRating() {
+            let productReviewText = document.getElementById('reviewText').value;
+
+            // Option 1: Get product ID from URL
+            const searchParams = new URLSearchParams(window.location.search);
+            const productId = searchParams.get('id');
+
+            // Validate
+            if (!productId) {
+                errorToast("Product ID not found!");
+                return;
+            }
+
+            let postBody = {
+                product_id: productId,
+                description: productReviewText,
+                rating: currentRating
+            };
+
+            $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+            try {
+                let res = await axios.post("/product-review", postBody);
+                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+
+                if (res.data['msg'] === "success") {
+                    successToast("Review submitted successfully");
+                } else {
+                    errorToast("Review submission failed");
+                }
+            } catch (e) {
+                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+                errorToast("Something went wrong!");
+                console.error(e);
+            }
+        }
+
+        listProductReview();
+
+        async function listProductReview(){
+
+            let res = await axios.get("/all-review/"+id);
+            let Details=await res.data['data'];
+
+            $("#listProductReview1").empty();
+
+
+            Details.forEach((item,i)=>{
+                const rating = parseInt(item.rating); // assume rating is from 1 to 5
+                let starsHTML = '';
+
+                // Loop to create star icons
+                for (let j = 1; j <= 5; j++) {
+                    if (j <= rating) {
+                        starsHTML += `<i class="fa fa-star check" style="color: #FFC107;"></i>`; // filled
+                    } else {
+                        starsHTML += `<i class="fa fa-star" style="color: #e4e5e9;"></i>`; // empty
+                    }
+                }
+
+                let each= `<li>
+                                <div class="comment_img">
+                                    <img src="assets/images/user1.jpg" alt="user1"/>
+                                </div>
+                                <div class="comment_block">
+                                    <div class="rating" id="ratingOutPut">
+                                        ${starsHTML}
+                                    </div>
+                                    <p class="customer_meta">
+                                        <span class="review_author">Alea Brooks</span>
+                                        <span class="comment-date">March 5, 2018</span>
+                                    </p>
+                                    <div class="description">
+                                        <p>${item['description']}</p>
+                                    </div>
+                                </div>
+                            </li>`;
+                $("#listProductReview1").append(each);
+            })
+        }
+
+
     </script>
-
-
+<style>
+    .star-rating {
+        font-size: 20px;
+        line-height: 1;
+        position: relative;
+        display: inline-block;
+    }
+    .back-stars {
+        color: #ccc; /* Gray */
+        position: relative;
+        z-index: 1;
+    }
+    .front-stars {
+        color: #ffc107; /* Yellow */
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        z-index: 2;
+    }
+    .check{
+        color: #f2c000;
+    }
+</style>
 

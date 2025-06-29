@@ -29,4 +29,14 @@ class ProductReviewController extends Controller
         }
     }
 
+    public function ListReviewByProduct(Request $request):JsonResponse{
+        $data=ProductReview::where('product_id',$request->product_id)
+            ->with(['profile'=>function($query){
+                $query->select('id','cus_name');
+            }])->get();
+        return ResponseHelper::Out('success',$data,200);
+    }
+
+
+
 }

@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     // Product Review
     Route::post('/product-review', [ProductReviewController::class, 'CreateProductReview'])->name('product.review');
 
+
     // Product Cart
     Route::post('/addTo-cart',[ProductCartsController::class, 'CreateCartList'])->name('addTo.cart');
     Route::get('/cart-list',[ProductCartsController::class, 'CartList'])->name('cart.list');
@@ -131,6 +132,7 @@ Route::get("/productDetailsById/{id}", [ProductController::class, 'ProductDetail
 Route::get("/details", [HomeController::class, 'productDetails'])->name('details.page');
 Route::get("/wishlist-page", [ProductWishController::class , 'wishList'])->name('wish.list');
 Route::get('/product-cart', [ProductCartsController::class, 'cartPage'])->name('product.cart');
+Route::get('/all-review/{product_id}', [ProductReviewController::class, 'ListReviewByProduct'])->name('all.review');
 
 // user login and register page
 Route::get("/user-login", [HomeController::class, 'loginPage'])->name('login-page');
